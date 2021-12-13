@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
+ * 实现按权重做负载均衡的简单算法，因为用到了伪随机数来选择服务节点，取名叫做随机权重分配法，实现思路来自Nacos源码。
+ *
  * @author liguangri
  */
 public class ChooseByRandomWeight implements IChooseServer {
@@ -18,16 +20,22 @@ public class ChooseByRandomWeight implements IChooseServer {
         double[] exactWeights = new double[serverList.size()];
         int index = 0;
         for (ServerInfo serverInfo : serverList) {
+            // 计算得出每个节点的权重值在总权重值之和中占多少比例
             exactWeights[index++] = serverInfo.getWeight() / weightSum;
         }
         double[] weights = new double[serverList.size()];
         for (int i = 0; i < index; i++) {
+            // 从第2个服务节点起，后一个服务节点本身的权重值+前一个，形成类似等差数列的一个权重值数组
+            // 最后一个节点的权重值应该是1，或者小于1且无限接近1的数值
             weights[i] = exactWeights[i];
             if (i > 0) {
                 weights[i] = weights[i] + weights[i -1];
             }
         }
+        // 生成一个0~1，不包含1的伪随机数
         double random = ThreadLocalRandom.current().nextDouble(0, 1);
+        // 利用二分法查找，找出上一步的随机数在权重值数组中的下标
+        // 因为二分法查找的特性，原始权重值越大的，在类似等差数列中占据的空间更大，随机数落在它的范围内的概率越大，被选中的概率也就更大
         index = Arrays.binarySearch(weights, random);
         if (index < 0) {
             index = -index - 1;
