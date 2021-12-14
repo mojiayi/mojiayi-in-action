@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 测试负载均衡算法，指定的分配轮数越多，越能体现具体算法的分配效果正确。
+ */
 public class LoadBalancerTest {
     private static final List<ServerInfo> hosts = new ArrayList<>(4);
 
