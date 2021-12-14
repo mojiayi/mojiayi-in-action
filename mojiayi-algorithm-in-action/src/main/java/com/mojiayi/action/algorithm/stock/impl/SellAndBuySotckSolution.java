@@ -22,6 +22,61 @@ public class SellAndBuySotckSolution implements ISellAndBuyStock {
         return sellAndBuyStock(stockList);
     }
 
+    @Override
+    public int findBestSolution(int[] prices) {
+        int stockSize = prices.length;
+        boolean isDiminishing = true;
+        for (int index = 0; index < stockSize; index++) {
+            if (index == stockSize - 1) {
+                continue;
+            }
+            isDiminishing = prices[index + 1] <= prices[index];
+            if (!isDiminishing) {
+                break;
+            }
+        }
+        if (isDiminishing) {
+            return 0;
+        }
+
+        Integer[][] differArray = new Integer[stockSize][stockSize];
+        for (int x = 0; x < stockSize; x++) {
+            int y = x + 1;
+            for (; y < stockSize; y++) {
+                int differ = prices[y] - prices[x];
+                if (differ > 0) {
+                    differArray[x][y] = differ;
+                }
+            }
+        }
+        int chosenX = 0;
+        int chosenY = 0;
+        int profit = 0;
+        for (int x = 0; x < stockSize; x++) {
+            int y = x + 1;
+            for (; y < stockSize; y++) {
+                if (differArray[x][y] == null) {
+                    x++;
+                    continue;
+                }
+                if (chosenX == 0 && chosenY == 0) {
+                    chosenX = x;
+                    chosenY = y;
+                    profit += differArray[x][y];
+                    x++;
+                    continue;
+                }
+                if (chosenX + 1 <= x && chosenY + 1 <= y) {
+                    chosenX = x;
+                    chosenY = y;
+                    profit += differArray[x][y];
+                    x++;
+                }
+            }
+        }
+        return profit;
+    }
+
     /**
      * 从下标0开始比较相邻两支股票的价格，如果每组股票的后面一支都小于或等于前一支，
      * 股票列表在价格上是一个递减数组，或新价格等于旧价格，利润不可能大于0
@@ -79,7 +134,6 @@ public class SellAndBuySotckSolution implements ISellAndBuyStock {
                     chosenY = y;
                     profit += differArray[x][y];
                     x++;
-//                    y++;
                     continue;
                 }
                 if (chosenX + 1 <= x && chosenY + 1 <= y) {
@@ -88,7 +142,6 @@ public class SellAndBuySotckSolution implements ISellAndBuyStock {
                     chosenY = y;
                     profit += differArray[x][y];
                     x++;
-//                    y++;
                 }
             }
         }

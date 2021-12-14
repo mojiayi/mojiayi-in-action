@@ -18,4 +18,11 @@ public interface ISellAndBuyStock {
      * @return 如果有利润大于0的买卖方案，返回得出的方案，否则返回null
      */
     StockSolution findBestSolution(List<StockMetadata> stockList);
+
+    /**
+     * 按leetcode中定义的传入参数和返回结果，找出股票买卖的最大利润
+     * @param prices 预设的股票价格变化趋势数据
+     * @return 返回利润最大的买卖方案，如果没有利润就返回0
+     */
+    int findBestSolution(int[] prices);
 }
