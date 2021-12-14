@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class SellAndBuySotckSolution implements ISellAndBuyStock {
     @Override
-    public StockSolution findBestSolution(List<StockMetadata> stockList) {
+    public StockSolution findBestSolutionTransactMutilTimes(List<StockMetadata> stockList) {
         int stockSize = stockList.size();
         int chosenX = 0;
         int chosenY = 0;
@@ -57,7 +57,7 @@ public class SellAndBuySotckSolution implements ISellAndBuyStock {
     }
 
     @Override
-    public int findBestSolution(int[] prices) {
+    public int findBestSolutionTransactMutilTimes(int[] prices) {
         int stockSize = prices.length;
         int chosenX = 0;
         int chosenY = 0;
@@ -84,6 +84,24 @@ public class SellAndBuySotckSolution implements ISellAndBuyStock {
                     chosenY = y;
                     profit += differ;
                     x++;
+                }
+            }
+        }
+        return profit;
+    }
+
+    @Override
+    public int findBestSolutionTransactSingleTime(int[] prices) {
+        // 这个实现是从leetcode上抄的，我自己之前写的是用两个for循环实现的，时间复杂度太高
+        int minPrice = Integer.MAX_VALUE;
+        int profit = 0;
+        for (int price : prices) {
+            if (price < minPrice) {
+                minPrice = price;
+            } else {
+                int differ = price - minPrice;
+                if (differ > profit) {
+                    profit = differ;
                 }
             }
         }
