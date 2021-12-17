@@ -1,0 +1,9 @@
+server:
+  port: 8089
+  servlet:
+    context-path: /api
+spring:
+  profiles:
+    active: dev
+  application:
+    name: commission-service

@@ -1,0 +1,9 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /api
+spring:
+  profiles:
+    active: dev
+  application:
+    name: member-service
