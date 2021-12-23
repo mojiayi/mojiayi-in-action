@@ -6,7 +6,11 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: path_route #路由的ID
-          uri: http://localhost:8089 #匹配后路由地址
+        - id: commission-path-route #路由的ID
+          uri: lb://commission-service #匹配后路由地址
           predicates: # 断言，路径相匹配的进行路由
             - Path=/api/commission-service/**
+        - id: member-path-route
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/member-service/**
