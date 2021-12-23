@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
  * @author liguangri
  */
 @RestController
-@RequestMapping("/commission")
+@RequestMapping("/commissions")
 @Slf4j
 public class CommissionController {
     @Autowired
     private ICommissionService commissionService;
 
-    @GetMapping("/queryDetailByOrderId")
-    public CommonResp<QueryCommissionDetailResp> queryCommissionDetailByOrderId(Long orderId) {
+    @GetMapping("/{orderId}")
+    public CommonResp<QueryCommissionDetailResp> getDetailByOrderId(@PathVariable("orderId") Long orderId) {
         Preconditions.checkArgument(orderId != null && orderId > 0, "订单id不能为空且必须大于0");
         CommissionDetail commissionDetail = commissionService.queryCommissionDetailByOrderId(orderId);
         if (commissionDetail == null) {
