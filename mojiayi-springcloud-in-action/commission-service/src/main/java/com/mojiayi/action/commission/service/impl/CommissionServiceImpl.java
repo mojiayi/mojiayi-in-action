@@ -27,7 +27,7 @@ public class CommissionServiceImpl implements ICommissionService {
         if (commissionDetail == null) {
             return null;
         }
-        CommonResp<MemberDetailResp> memberDetailResp = memberServiceIntegration.queryMemberDetailByMemberId(commissionDetail.getMemberId());
+        CommonResp<MemberDetailResp> memberDetailResp = memberServiceIntegration.getDetailByMemberId(commissionDetail.getMemberId());
         String memberName = "-";
         if (memberDetailResp.isSuccess() && memberDetailResp.getData() != null) {
             memberName = memberDetailResp.getData().getMemberName();

@@ -5,7 +5,7 @@ import com.mojiayi.action.common.tool.response.CommonResp;
 import com.mojiayi.action.member.response.MemberDetailResp;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * @author liguangri
@@ -17,6 +17,6 @@ public interface MemberServiceIntegration {
      * @param memberId 会员id
      * @return
      */
-    @GetMapping("api/member/queryDetail")
-    CommonResp<MemberDetailResp> queryMemberDetailByMemberId(@RequestParam Long memberId);
+    @GetMapping("api/members/{memberId}")
+    CommonResp<MemberDetailResp> getDetailByMemberId(@PathVariable("memberId") Long memberId);
 }
