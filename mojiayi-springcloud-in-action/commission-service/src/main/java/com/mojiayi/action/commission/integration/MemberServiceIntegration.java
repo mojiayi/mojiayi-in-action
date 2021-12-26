@@ -17,6 +17,6 @@ public interface MemberServiceIntegration {
      * @param memberId 会员id
      * @return
      */
-    @GetMapping("api/members/{memberId}")
+    @GetMapping("api/member-service/members/{memberId}")
     CommonResp<MemberDetailResp> getDetailByMemberId(@PathVariable("memberId") Long memberId);
 }

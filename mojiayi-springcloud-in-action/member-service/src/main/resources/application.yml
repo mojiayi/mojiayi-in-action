@@ -1,7 +1,7 @@
 server:
   port: 8088
   servlet:
-    context-path: /api/member-serivce
+    context-path: /api/member-service
 spring:
   profiles:
     active: dev
