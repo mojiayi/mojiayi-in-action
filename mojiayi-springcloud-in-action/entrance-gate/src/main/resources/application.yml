@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: mojiayi-gateway
+  main:
+    allow-bean-definition-overriding: true
   cloud:
     gateway:
       routes:
@@ -14,3 +16,7 @@ spring:
           uri: http://localhost:8088
           predicates:
             - Path=/api/member-service/**
+    sentinel:
+      transport:
+        port: 18763
+        dashboard: localhost:8748
