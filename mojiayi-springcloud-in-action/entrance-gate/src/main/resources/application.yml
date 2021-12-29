@@ -7,16 +7,26 @@ spring:
     allow-bean-definition-overriding: true
   cloud:
     gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
       routes:
         - id: commission-path-route #路由的ID
           uri: lb://commission-service #匹配后路由地址
           predicates: # 断言，路径相匹配的进行路由
             - Path=/api/commission-service/**
+          filters:
+            - StripPrefix=0
         - id: member-path-route
           uri: http://localhost:8088
           predicates:
             - Path=/api/member-service/**
+          filters:
+            - StripPrefix=0
     sentinel:
       transport:
         port: 18763
         dashboard: localhost:8748
+logging:
+  level:
+    org.springframework:cloud.gateway: debug
