@@ -7,7 +7,7 @@ import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
 import java.util.List;
 
 /**
- * 以按权限值轮询的方式分配服务节点，实现思路来自一个前同事的沟通分享
+ * 以平滑权重轮询的方式分配服务节点
  *
  * @author liguangri
  */

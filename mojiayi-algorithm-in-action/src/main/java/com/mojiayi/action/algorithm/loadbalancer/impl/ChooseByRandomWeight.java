@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 实现按权重做负载均衡的简单算法，因为用到了伪随机数来选择服务节点，取名叫做随机权重分配法，实现思路来自Nacos源码。
+ * 加权随机，实现按权重做负载均衡的简单算法，用伪随机数来选择服务节点，实现思路来自Nacos源码。
  *
  * @author liguangri
  */
