@@ -1,6 +1,7 @@
 package com.mojiayi.action.member.controller;
 
 import cn.hutool.http.HttpStatus;
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.google.common.base.Preconditions;
 import com.mojiayi.action.common.tool.response.CommonResp;
 import com.mojiayi.action.member.domain.Member;
@@ -25,6 +26,7 @@ public class MemberController {
     @Autowired
     private IMemberService memberService;
 
+    @ApiOperationSupport(author = "liguangri")
     @ApiOperation(value = "查会员详情")
     @ApiImplicitParam(name = "memberId", value = "会员id", dataType = "Long", required = true)
     @GetMapping("/{memberId}")

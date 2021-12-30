@@ -1,6 +1,7 @@
 package com.mojiayi.action.commission.controller;
 
 import cn.hutool.http.HttpStatus;
+import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.google.common.base.Preconditions;
 import com.mojiayi.action.commission.domain.CommissionDetail;
 import com.mojiayi.action.commission.response.QueryCommissionDetailResp;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * @author liguangri
  */
+@ApiSupport(author = "liguangri")
 @Api(tags = "佣金")
 @RestController
 @RequestMapping("/commissions")
