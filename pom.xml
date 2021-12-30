@@ -26,7 +26,6 @@
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
         <knife4j.version>3.0.3</knife4j.version>
-        <swagger-bootstrap-ui.version>1.9.5</swagger-bootstrap-ui.version>
         <swagger.version>1.5.22</swagger.version>
         <hutool.version>5.7.17</hutool.version>
         <guava.version>31.0.1-jre</guava.version>
@@ -68,12 +67,6 @@
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>swagger-bootstrap-ui</artifactId>
-                <version>${swagger-bootstrap-ui.version}</version>
             </dependency>
 
             <dependency>
