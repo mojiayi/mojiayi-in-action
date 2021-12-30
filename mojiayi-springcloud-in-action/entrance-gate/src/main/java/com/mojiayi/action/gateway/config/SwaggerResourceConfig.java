@@ -2,6 +2,7 @@ package com.mojiayi.action.gateway.config;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.gateway.config.GatewayProperties;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.support.NameUtils;
@@ -12,6 +13,7 @@ import springfox.documentation.swagger.web.SwaggerResourcesProvider;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author liguangri
@@ -21,10 +23,11 @@ import java.util.List;
 @Primary
 @AllArgsConstructor
 public class SwaggerResourceConfig implements SwaggerResourcesProvider {
-
     private final RouteLocator routeLocator;
     private final GatewayProperties gatewayProperties;
 
+    @Autowired
+    private RouteIdNameConfiguration routeIdNameConfiguration;
 
     @Override
     public List<SwaggerResource> get() {
@@ -41,8 +44,9 @@ public class SwaggerResourceConfig implements SwaggerResourcesProvider {
         return resources;
     }
 
-    private SwaggerResource swaggerResource(String name, String location) {
-        log.info("name:{},location:{}", name, location);
+    private SwaggerResource swaggerResource(String routeId, String location) {
+        String name = Optional.ofNullable(routeIdNameConfiguration.getRouteIdNameMap().get(routeId)).orElse(routeId);
+        log.info("routeId:{},name:{},location:{}", routeId, name, location);
         SwaggerResource swaggerResource = new SwaggerResource();
         swaggerResource.setName(name);
         swaggerResource.setLocation(location);

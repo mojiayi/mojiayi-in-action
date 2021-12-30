@@ -1,4 +1,4 @@
-package com.mojiayi.action.commission.response;
+package com.mojiayi.action.commission.param;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,12 +12,10 @@ import java.util.Date;
  * @author liguangri
  */
 @Data
-@ApiModel("佣金获取明细")
-public class QueryCommissionDetailResp implements Serializable {
+@ApiModel("更新佣金获取明细的参数")
+public class UpdateCommissionDetailParam implements Serializable {
     @ApiModelProperty("会员id")
     private Long memberId;
-    @ApiModelProperty("会员名")
-    private String memberName;
     @ApiModelProperty("订单id")
     private Long orderId;
     @ApiModelProperty("佣金金额")

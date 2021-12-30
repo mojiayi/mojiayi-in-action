@@ -30,3 +30,7 @@ spring:
 logging:
   level:
     org.springframework:cloud.gateway: debug
+route-id-name-map:
+    # 这里的路由id必须与spring.cloud.gateway.routes.id里配置的相同
+  commission-path-route: 佣金服务
+  member-path-route: 会员服务

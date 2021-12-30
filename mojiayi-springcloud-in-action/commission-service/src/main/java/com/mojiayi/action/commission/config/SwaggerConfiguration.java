@@ -36,8 +36,8 @@ public class SwaggerConfiguration {
 
     private ApiInfo groupApiInfo() {
         return new ApiInfoBuilder()
-                .title("swagger-bootstrap-ui很棒~~~！！！")
-                .description("<div style='font-size:14px;color:red;'>swagger-bootstrap-ui-demo RESTful APIs</div>")
+                .title("佣金服务接口文档")
+                .description("这是一个用于试验集成gateway+knife4j的示例项目")
                 .termsOfServiceUrl("http://www.mojiayi.com/")
                 .contact(new Contact("mojiayi", "http://www.mojiayi.com", "woshimojiayi@163.com"))
                 .version("1.0")

@@ -13,6 +13,6 @@ import org.springframework.stereotype.Component;
 public class MemberServiceIntegrationFallback implements MemberServiceIntegration {
     @Override
     public CommonResp<MemberDetailResp> getDetailByMemberId(Long memberId) {
-        return new CommonResp<>("查询会员详情失败", HttpStatus.HTTP_INTERNAL_ERROR);
+        return CommonResp.error(HttpStatus.HTTP_INTERNAL_ERROR, "查询会员详情失败");
     }
 }

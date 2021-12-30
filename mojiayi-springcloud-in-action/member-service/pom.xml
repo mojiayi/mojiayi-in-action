@@ -12,7 +12,7 @@
     <artifactId>member-service</artifactId>
 
     <name>member-service</name>
-    <url>http://www.example.com</url>
+    <url>http://www.mojiayi.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

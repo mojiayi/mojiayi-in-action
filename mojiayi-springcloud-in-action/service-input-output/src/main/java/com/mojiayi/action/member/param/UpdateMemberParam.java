@@ -1,4 +1,4 @@
-package com.mojiayi.action.member.response;
+package com.mojiayi.action.member.param;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,9 +9,9 @@ import java.io.Serializable;
 /**
  * @author liguangri
  */
+@ApiModel("更新会员信息的参数")
 @Data
-@ApiModel("会员详情")
-public class MemberDetailResp implements Serializable {
+public class UpdateMemberParam implements Serializable {
     @ApiModelProperty("会员id")
     private Long memberId;
     @ApiModelProperty("会员名")

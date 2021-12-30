@@ -12,7 +12,7 @@
     <artifactId>common-tools</artifactId>
 
     <name>common-tools</name>
-    <url>http://www.example.com</url>
+    <url>http://www.mojiayi.com</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
