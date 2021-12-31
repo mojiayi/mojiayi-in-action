@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author liguangri
  */
-public interface IChooseServer {
+public interface IServerScheduler {
     /**
      * 返回一个服务节点
      *
