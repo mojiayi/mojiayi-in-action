@@ -4,7 +4,7 @@ import com.mojiayi.action.algorithm.loadbalancer.IServerScheduler;
 import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
 import com.mojiayi.action.algorithm.loadbalancer.impl.RoundRobinScheduler;
 import com.mojiayi.action.algorithm.loadbalancer.impl.WeightedRandomScheduler;
-import com.mojiayi.action.algorithm.loadbalancer.impl.WeightedRoundRobinScheduler;
+import com.mojiayi.action.algorithm.loadbalancer.impl.SmoothWeightedRoundRobinScheduler;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class LoadBalancerTest {
 
     @Test
     public void testWeightedRoundRobinScheduler() {
-        IServerScheduler serverScheduler = new WeightedRoundRobinScheduler();
+        IServerScheduler serverScheduler = new SmoothWeightedRoundRobinScheduler();
         int cycle = 1000;
         int[] matchRecord = choose(serverScheduler, cycle);
         System.out.println(Arrays.toString(matchRecord));

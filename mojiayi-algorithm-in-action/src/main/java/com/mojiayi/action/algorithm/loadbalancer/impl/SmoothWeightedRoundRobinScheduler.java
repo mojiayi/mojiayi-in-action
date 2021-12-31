@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author liguangri
  */
-public class WeightedRoundRobinScheduler implements IServerScheduler {
+public class SmoothWeightedRoundRobinScheduler implements IServerScheduler {
     @Override
     public ServerInfo choose(List<ServerInfo> serverList) {
         if (CollectionUtil.isEmpty(serverList)) {
