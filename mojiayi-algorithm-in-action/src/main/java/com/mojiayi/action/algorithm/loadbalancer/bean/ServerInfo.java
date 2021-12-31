@@ -20,9 +20,9 @@ public class ServerInfo {
     /**
      * 服务节点固定权重值，在分配过程中不变
      */
-    private double weight;
+    private int weight;
     /**
      * 专门用于按权重轮询的动态权重值，在{@code ChooseByRoundRobinWeight}的分配过程中变化
      */
-    private double currentWeight;
+    private int currentWeight;
 }

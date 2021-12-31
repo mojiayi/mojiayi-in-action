@@ -18,7 +18,7 @@ public class SmoothWeightedRoundRobinScheduler implements IServerScheduler {
             return null;
         }
         // 把所有服务节点的权重值相加，用于后续的计算
-        double weightSum = serverList.stream().mapToDouble(ServerInfo::getWeight).sum();
+        int weightSum = serverList.stream().mapToInt(ServerInfo::getWeight).sum();
         ServerInfo chosenServer = null;
         for (ServerInfo serverInfo : serverList) {
             // 如果初始化serverList时，把currentWeight设置为和weight相同的值，第一次就会返回权重值最大的服务节点
