@@ -1,7 +1,7 @@
 package com.mojiayi.action.algorithm.loadbalancer.impl;
 
 import cn.hutool.core.collection.CollectionUtil;
-import com.mojiayi.action.algorithm.loadbalancer.IChooseServer;
+import com.mojiayi.action.algorithm.loadbalancer.IServerScheduler;
 import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author liguangri
  */
-public class ChooseByRoundRobinWeight implements IChooseServer {
+public class WeightedRoundRobinScheduler implements IServerScheduler {
     @Override
     public ServerInfo choose(List<ServerInfo> serverList) {
         if (CollectionUtil.isEmpty(serverList)) {

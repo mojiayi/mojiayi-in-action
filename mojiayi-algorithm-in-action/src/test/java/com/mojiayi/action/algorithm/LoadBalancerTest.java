@@ -1,9 +1,9 @@
 package com.mojiayi.action.algorithm;
 
-import com.mojiayi.action.algorithm.loadbalancer.IChooseServer;
+import com.mojiayi.action.algorithm.loadbalancer.IServerScheduler;
 import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
-import com.mojiayi.action.algorithm.loadbalancer.impl.ChooseByRandomWeight;
-import com.mojiayi.action.algorithm.loadbalancer.impl.ChooseByRoundRobinWeight;
+import com.mojiayi.action.algorithm.loadbalancer.impl.WeightedRandomScheduler;
+import com.mojiayi.action.algorithm.loadbalancer.impl.WeightedRoundRobinScheduler;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class LoadBalancerTest {
 
     @Test
     public void testChooseByRandomWeight() {
-        IChooseServer chooseByRandomWeight = new ChooseByRandomWeight();
+        IServerScheduler chooseByRandomWeight = new WeightedRandomScheduler();
         int cycle = 1000;
         int[] matchRecord = choose(chooseByRandomWeight, cycle);
         System.out.println(Arrays.toString(matchRecord));
@@ -35,13 +35,13 @@ public class LoadBalancerTest {
 
     @Test
     public void testChooseByRoundRobinWeight() {
-        IChooseServer chooseServer = new ChooseByRoundRobinWeight();
+        IServerScheduler chooseServer = new WeightedRoundRobinScheduler();
         int cycle = 1000;
         int[] matchRecord = choose(chooseServer, cycle);
         System.out.println(Arrays.toString(matchRecord));
     }
 
-    private int[] choose(IChooseServer chooseServer, int cycle) {
+    private int[] choose(IServerScheduler chooseServer, int cycle) {
         int[] matchRecord = new int[hosts.size()];
         for (int count = 0; count < cycle; count++) {
             ServerInfo chosenInstance = chooseServer.choose(hosts);

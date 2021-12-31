@@ -1,6 +1,6 @@
 package com.mojiayi.action.algorithm.loadbalancer.impl;
 
-import com.mojiayi.action.algorithm.loadbalancer.IChooseServer;
+import com.mojiayi.action.algorithm.loadbalancer.IServerScheduler;
 import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
 
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
  *
  * @author liguangri
  */
-public class ChooseByRandomWeight implements IChooseServer {
+public class WeightedRandomScheduler implements IServerScheduler {
     @Override
     public ServerInfo choose(List<ServerInfo> serverList) {
         // 把所有服务节点的权重值相加，用于后续的计算
