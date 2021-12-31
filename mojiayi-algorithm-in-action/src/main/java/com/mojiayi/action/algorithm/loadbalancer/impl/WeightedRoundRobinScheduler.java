@@ -7,7 +7,7 @@ import com.mojiayi.action.algorithm.loadbalancer.bean.ServerInfo;
 import java.util.List;
 
 /**
- * 以平滑权重轮询的方式分配服务节点
+ * 平滑权重轮询
  *
  * @author liguangri
  */

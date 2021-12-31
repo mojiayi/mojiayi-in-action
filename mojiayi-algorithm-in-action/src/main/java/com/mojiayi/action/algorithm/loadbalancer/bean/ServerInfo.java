@@ -10,6 +10,10 @@ import lombok.Data;
 @Data
 public class ServerInfo {
     /**
+     * 服务id
+     */
+    private int serviceId;
+    /**
      * 服务节点名
      */
     private String serviceName;

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 加权随机，实现按权重做负载均衡的简单算法，用伪随机数来选择服务节点，实现思路来自Nacos源码。
+ * 加权随机，实现思路来自Nacos源码。
  *
  * @author liguangri
  */
