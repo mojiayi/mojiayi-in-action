@@ -2,6 +2,7 @@ package com.mojiayi.action.algorithm;
 
 import com.mojiayi.action.algorithm.sort.impl.ExclusiveOrBubbleSorting;
 import com.mojiayi.action.algorithm.sort.impl.NoTempDataSwapBubbleSorting;
+import com.mojiayi.action.algorithm.sort.impl.TraditionalInsertSorting;
 import com.mojiayi.action.algorithm.sort.impl.TraditionalSwapBubbleSorting;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,6 +27,13 @@ public class SortingTest {
     @Test
     public void testExclusiveOrBubbleSorting() {
         ExclusiveOrBubbleSorting sortingAlgorithm = new ExclusiveOrBubbleSorting();
+        int[] sortedData = sortingAlgorithm.sort(inputData);
+        verifySortResult(sortedData);
+    }
+
+    @Test
+    public void testTraditionalInsertSorting() {
+        TraditionalInsertSorting sortingAlgorithm = new TraditionalInsertSorting();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
