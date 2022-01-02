@@ -4,6 +4,7 @@ import com.mojiayi.action.algorithm.sort.impl.ExclusiveOrBubbleSorting;
 import com.mojiayi.action.algorithm.sort.impl.NoTempDataSwapBubbleSorting;
 import com.mojiayi.action.algorithm.sort.impl.RememberInsertPointInsertSorting;
 import com.mojiayi.action.algorithm.sort.impl.TraditionalInsertSorting;
+import com.mojiayi.action.algorithm.sort.impl.TraditionalSelectionSorting;
 import com.mojiayi.action.algorithm.sort.impl.TraditionalSwapBubbleSorting;
 import org.junit.Assert;
 import org.junit.Test;
@@ -42,6 +43,13 @@ public class SortingTest {
     @Test
     public void testRememberInsertPointInsertSorting() {
         RememberInsertPointInsertSorting sortingAlgorithm = new RememberInsertPointInsertSorting();
+        int[] sortedData = sortingAlgorithm.sort(inputData);
+        verifySortResult(sortedData);
+    }
+
+    @Test
+    public void testTraditionalSelectionSorting() {
+        TraditionalSelectionSorting sortingAlgorithm = new TraditionalSelectionSorting();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
