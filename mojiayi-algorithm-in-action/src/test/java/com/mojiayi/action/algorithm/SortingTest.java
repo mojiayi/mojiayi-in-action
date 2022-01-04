@@ -4,9 +4,10 @@ import com.mojiayi.action.algorithm.sort.impl.BubbleSortingExclusiveOr;
 import com.mojiayi.action.algorithm.sort.impl.BubbleSortingNoTempDataSwap;
 import com.mojiayi.action.algorithm.sort.impl.InsertSortingRememberInsertPoint;
 import com.mojiayi.action.algorithm.sort.impl.InsertSortingTraditional;
+import com.mojiayi.action.algorithm.sort.impl.QuickSortingTraditional;
 import com.mojiayi.action.algorithm.sort.impl.SelectionSortingOnlyOneArray;
 import com.mojiayi.action.algorithm.sort.impl.SelectionSortingTraditional;
-import com.mojiayi.action.algorithm.sort.impl.BubbleSortingTraditionalSwap;
+import com.mojiayi.action.algorithm.sort.impl.BubbleSortingTraditional;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,8 +15,8 @@ public class SortingTest {
     private static final int[] inputData = {7, 4, 8, 2, 3, 5, 6, 1};
 
     @Test
-    public void testBubbleSortingTraditionalSwap() {
-        BubbleSortingTraditionalSwap sortingAlgorithm = new BubbleSortingTraditionalSwap();
+    public void testBubbleSortingTraditional() {
+        BubbleSortingTraditional sortingAlgorithm = new BubbleSortingTraditional();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
@@ -61,6 +62,14 @@ public class SortingTest {
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
+
+    @Test
+    public void testQuickSortingTraditional() {
+        QuickSortingTraditional sortingAlgorithm = new QuickSortingTraditional();
+        int[] sortedData = sortingAlgorithm.sort(inputData);
+        verifySortResult(sortedData);
+    }
+
     private void verifySortResult(int[] sortedData) {
         int expected = 1;
         Assert.assertEquals(expected, sortedData[expected - 1]);

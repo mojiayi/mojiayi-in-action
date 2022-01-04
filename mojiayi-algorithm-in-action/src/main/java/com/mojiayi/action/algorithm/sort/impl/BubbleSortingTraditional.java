@@ -7,7 +7,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
  *
  * @author liguangri
  */
-public class BubbleSortingTraditionalSwap implements ISorting {
+public class BubbleSortingTraditional implements ISorting {
     @Override
     public int[] sort(int[] dataList) {
         int size = dataList.length;
