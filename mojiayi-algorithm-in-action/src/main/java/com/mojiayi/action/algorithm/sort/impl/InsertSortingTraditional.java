@@ -7,7 +7,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
  *
  * @author liguangri
  */
-public class TraditionalInsertSorting implements ISorting {
+public class InsertSortingTraditional implements ISorting {
     @Override
     public int[] sort(int[] dataList) {
         int[] sortedList = new int[dataList.length];

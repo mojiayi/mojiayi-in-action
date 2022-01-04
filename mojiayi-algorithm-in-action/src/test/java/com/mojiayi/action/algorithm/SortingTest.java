@@ -1,11 +1,11 @@
 package com.mojiayi.action.algorithm;
 
-import com.mojiayi.action.algorithm.sort.impl.ExclusiveOrBubbleSorting;
-import com.mojiayi.action.algorithm.sort.impl.NoTempDataSwapBubbleSorting;
-import com.mojiayi.action.algorithm.sort.impl.RememberInsertPointInsertSorting;
-import com.mojiayi.action.algorithm.sort.impl.TraditionalInsertSorting;
-import com.mojiayi.action.algorithm.sort.impl.TraditionalSelectionSorting;
-import com.mojiayi.action.algorithm.sort.impl.TraditionalSwapBubbleSorting;
+import com.mojiayi.action.algorithm.sort.impl.BubbleSortingExclusiveOr;
+import com.mojiayi.action.algorithm.sort.impl.BubbleSortingNoTempDataSwap;
+import com.mojiayi.action.algorithm.sort.impl.InsertSortingRememberInsertPoint;
+import com.mojiayi.action.algorithm.sort.impl.InsertSortingTraditional;
+import com.mojiayi.action.algorithm.sort.impl.SelectionSortingTraditional;
+import com.mojiayi.action.algorithm.sort.impl.BubbleSortingTraditionalSwap;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,42 +14,42 @@ public class SortingTest {
 
     @Test
     public void testTraditionalBubbleSorting() {
-        TraditionalSwapBubbleSorting sortingAlgorithm = new TraditionalSwapBubbleSorting();
+        BubbleSortingTraditionalSwap sortingAlgorithm = new BubbleSortingTraditionalSwap();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
 
     @Test
     public void testNoTempDataBubbleSorting() {
-        NoTempDataSwapBubbleSorting sortingAlgorithm = new NoTempDataSwapBubbleSorting();
+        BubbleSortingNoTempDataSwap sortingAlgorithm = new BubbleSortingNoTempDataSwap();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
 
     @Test
     public void testExclusiveOrBubbleSorting() {
-        ExclusiveOrBubbleSorting sortingAlgorithm = new ExclusiveOrBubbleSorting();
+        BubbleSortingExclusiveOr sortingAlgorithm = new BubbleSortingExclusiveOr();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
 
     @Test
     public void testTraditionalInsertSorting() {
-        TraditionalInsertSorting sortingAlgorithm = new TraditionalInsertSorting();
+        InsertSortingTraditional sortingAlgorithm = new InsertSortingTraditional();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
 
     @Test
     public void testRememberInsertPointInsertSorting() {
-        RememberInsertPointInsertSorting sortingAlgorithm = new RememberInsertPointInsertSorting();
+        InsertSortingRememberInsertPoint sortingAlgorithm = new InsertSortingRememberInsertPoint();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
 
     @Test
     public void testTraditionalSelectionSorting() {
-        TraditionalSelectionSorting sortingAlgorithm = new TraditionalSelectionSorting();
+        SelectionSortingTraditional sortingAlgorithm = new SelectionSortingTraditional();
         int[] sortedData = sortingAlgorithm.sort(inputData);
         verifySortResult(sortedData);
     }
