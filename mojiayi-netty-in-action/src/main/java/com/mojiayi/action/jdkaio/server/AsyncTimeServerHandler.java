@@ -1,4 +1,4 @@
-package com.mojiayi.action.netty.jdkaio.server;
+package com.mojiayi.action.jdkaio.server;
 
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousServerSocketChannel;
@@ -7,9 +7,9 @@ import java.util.concurrent.CountDownLatch;
 public class AsyncTimeServerHandler implements Runnable {
     private int port;
 
-    private CountDownLatch countDownLatch;
+    CountDownLatch countDownLatch;
 
-    private AsynchronousServerSocketChannel serverSocketChannel;
+    AsynchronousServerSocketChannel serverSocketChannel;
 
     public AsyncTimeServerHandler(int port) {
         this.port = port;
@@ -26,9 +26,16 @@ public class AsyncTimeServerHandler implements Runnable {
     public void run() {
         countDownLatch = new CountDownLatch(1);
 
+        doAccept();
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void doAccept() {
-//        serverSocketChannel.ac(new AcceptCompletiondHandler());
+        serverSocketChannel.accept(this, new AcceptCompletiondHandler());
     }
 }

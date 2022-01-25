@@ -1,4 +1,4 @@
-package com.mojiayi.action.netty.jdkaio.server;
+package com.mojiayi.action.jdkaio.server;
 
 public class AsyncTimeServer {
     public static void main(String[] args) {
