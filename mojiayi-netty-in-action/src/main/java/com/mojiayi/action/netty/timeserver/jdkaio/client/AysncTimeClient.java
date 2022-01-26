@@ -1,4 +1,4 @@
-package com.mojiayi.action.jdkaio.client;
+package com.mojiayi.action.netty.timeserver.jdkaio.client;
 
 public class AysncTimeClient {
     public static void main(String[] args) {

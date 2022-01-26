@@ -1,4 +1,4 @@
-package com.mojiayi.action.jdknio.server;
+package com.mojiayi.action.netty.timeserver.jdknio.server;
 
 public class TimeServer {
     public static void main(String[] args) {

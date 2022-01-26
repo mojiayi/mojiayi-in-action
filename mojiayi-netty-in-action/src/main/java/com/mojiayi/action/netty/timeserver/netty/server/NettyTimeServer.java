@@ -1,4 +1,4 @@
-package com.mojiayi.action.netty.server;
+package com.mojiayi.action.netty.timeserver.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

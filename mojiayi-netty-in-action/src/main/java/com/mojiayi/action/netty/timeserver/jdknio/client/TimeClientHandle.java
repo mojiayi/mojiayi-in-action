@@ -1,47 +1,50 @@
-package com.mojiayi.action.jdknio.server;
+package com.mojiayi.action.netty.timeserver.jdknio.client;
+
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Set;
 
-public class MultiplexerTimeServer implements Runnable {
+public class TimeClientHandle implements Runnable {
+    private String host;
+    private int port;
     private Selector selector;
-    private ServerSocketChannel serverSocketChannel;
+    private SocketChannel socketChannel;
     private volatile boolean stop;
 
-    public MultiplexerTimeServer(int port) {
+    public TimeClientHandle(String host, int port) {
+        this.host = Optional.ofNullable(host).orElse("127.0.0.1");
+        this.port = port;
         try {
-            this.selector = Selector.open();
-            this.serverSocketChannel = ServerSocketChannel.open();
-            this.serverSocketChannel.configureBlocking(false);
-            this.serverSocketChannel.socket().bind(new InetSocketAddress(port), 1024);
-            this.serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-            System.out.println("the time server is start in port:" + port);
+            selector = Selector.open();
+            socketChannel = SocketChannel.open();
+            socketChannel.configureBlocking(false);
         } catch (IOException e) {
             e.printStackTrace();
             System.exit(1);
         }
     }
 
-    public void stop() {
-        this.stop = true;
-    }
-
     @Override
     public void run() {
+        try {
+            doConnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         while (!stop) {
             try {
                 selector.select(1000L);
-                Set<SelectionKey> selectedKeySet = selector.selectedKeys();
-                Iterator<SelectionKey> iterator = selectedKeySet.iterator();
+                Set<SelectionKey> selectionKeySet = selector.selectedKeys();
+                Iterator<SelectionKey> iterator = selectionKeySet.iterator();
                 SelectionKey selectionKey = null;
                 while (iterator.hasNext()) {
                     selectionKey = iterator.next();
@@ -59,6 +62,7 @@ public class MultiplexerTimeServer implements Runnable {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                System.exit(1);
             }
         }
         if (selector != null) {
@@ -70,16 +74,28 @@ public class MultiplexerTimeServer implements Runnable {
         }
     }
 
+    private void doConnect() throws IOException {
+        boolean connectFlag = socketChannel.connect(new InetSocketAddress(host, port));
+        if (connectFlag) {
+            socketChannel.register(selector, SelectionKey.OP_READ);
+            doWrite(socketChannel);
+        } else {
+            socketChannel.register(selector, SelectionKey.OP_CONNECT);
+        }
+    }
+
     private void handleInput(SelectionKey selectionKey) throws IOException {
         if (selectionKey.isValid()) {
-            if (selectionKey.isAcceptable()) {
-                ServerSocketChannel serverSocketChannel = (ServerSocketChannel) selectionKey.channel();
-                SocketChannel socketChannel = serverSocketChannel.accept();
-                socketChannel.configureBlocking(false);
-                socketChannel.register(selector, SelectionKey.OP_READ);
+            SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
+            if (selectionKey.isConnectable()) {
+                if (socketChannel.finishConnect()) {
+                    socketChannel.register(selector, SelectionKey.OP_READ);
+                    doWrite(socketChannel);
+                } else {
+                    System.exit(1);
+                }
             }
             if (selectionKey.isReadable()) {
-                SocketChannel socketChannel = (SocketChannel) selectionKey.channel();
                 ByteBuffer readBuffer = ByteBuffer.allocate(1024);
                 int readBytes = socketChannel.read(readBuffer);
                 if (readBytes > 0) {
@@ -87,9 +103,8 @@ public class MultiplexerTimeServer implements Runnable {
                     byte[] bytes = new byte[readBuffer.remaining()];
                     readBuffer.get(bytes);
                     String body = new String(bytes, StandardCharsets.UTF_8);
-                    System.out.println(" The time server receive order : " + body);
-                    String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date().toString() : "BAD ORDER";
-                    doWrite(socketChannel, currentTime);
+                    System.out.println("now is " + body);
+                    this.stop = true;
                 } else if (readBytes < 0) {
                     selectionKey.cancel();
                     socketChannel.close();
@@ -98,13 +113,14 @@ public class MultiplexerTimeServer implements Runnable {
         }
     }
 
-    private void doWrite(SocketChannel socketChannel, String response) throws IOException {
-        if (response != null && response.trim().length() > 0) {
-            byte[] bytes = response.getBytes();
-            ByteBuffer writeBuffer = ByteBuffer.allocate(bytes.length);
-            writeBuffer.put(bytes);
-            writeBuffer.flip();
-            socketChannel.write(writeBuffer);
+    private void doWrite(SocketChannel socketChannel) throws IOException {
+        byte[] req = "QUERY TIME ORDER".getBytes();
+        ByteBuffer writeBuffer = ByteBuffer.allocate(req.length);
+        writeBuffer.put(req);
+        writeBuffer.flip();
+        socketChannel.write(writeBuffer);
+        if (!writeBuffer.hasRemaining()) {
+            System.out.println("Send order to server successfully");
         }
     }
 }

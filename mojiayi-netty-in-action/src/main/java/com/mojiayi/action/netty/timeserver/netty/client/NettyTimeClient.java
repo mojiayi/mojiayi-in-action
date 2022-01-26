@@ -1,4 +1,4 @@
-package com.mojiayi.action.netty.client;
+package com.mojiayi.action.netty.timeserver.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -7,12 +7,9 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioChannelOption;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
-
-import java.net.InetSocketAddress;
 
 public class NettyTimeClient {
     public static void main(String[] args) throws InterruptedException {

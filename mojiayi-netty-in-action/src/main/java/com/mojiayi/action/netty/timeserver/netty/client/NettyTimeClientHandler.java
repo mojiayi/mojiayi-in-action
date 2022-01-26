@@ -1,4 +1,4 @@
-package com.mojiayi.action.netty.client;
+package com.mojiayi.action.netty.timeserver.netty.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
