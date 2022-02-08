@@ -70,5 +70,10 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
             channelFuture.addListener(ChannelFutureListener.CLOSE);
         }
     }
+
+    @Override
+    public void channelReadComplete(ChannelHandlerContext ctx) {
+        ctx.flush();
+    }
 }
 
