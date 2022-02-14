@@ -7,6 +7,7 @@ import com.mojiayi.action.algorithm.shortestpath.dijkstra.Node;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,14 +16,32 @@ public class FindShortestPathTest {
     @Test
     public void findByDijkstra() {
         Graph graph = init();
-
         Map<String, Node> availableNodes = graph.getNodes().stream().collect(Collectors.toMap(Node::getName, Function.identity()));
-        Node sourceNode = availableNodes.get("A");
+
+        String sourceNodeName = "A";
+        Node sourceNode = availableNodes.get(sourceNodeName);
 
         IFindShortestPath handler = new Dijkstra();
-        Graph shortestPath = handler.findShortestPath(graph, sourceNode);
+        Map<String, Node> calculatedGraph = handler.findShortestPath(graph, sourceNode)
+                .getNodes().stream().collect(Collectors.toMap(Node::getName, Function.identity()));
 
-        Assert.assertNotNull(shortestPath);
+        String terminalNodeName = "E";
+        Node terminalNode = calculatedGraph.get(terminalNodeName);
+        Assert.assertNotNull(terminalNode);
+        Assert.assertEquals(3L, terminalNode.getShortestPath().size());
+        List<Node> shortestPath = terminalNode.getShortestPath();
+        Assert.assertEquals("A", shortestPath.get(0).getName());
+        Assert.assertEquals("B", shortestPath.get(1).getName());
+        Assert.assertEquals("D", shortestPath.get(2).getName());
+
+        terminalNodeName = "F";
+        terminalNode = calculatedGraph.get(terminalNodeName);
+        Assert.assertNotNull(terminalNode);
+        Assert.assertEquals(3L, terminalNode.getShortestPath().size());
+        shortestPath = terminalNode.getShortestPath();
+        Assert.assertEquals("A", shortestPath.get(0).getName());
+        Assert.assertEquals("B", shortestPath.get(1).getName());
+        Assert.assertEquals("D", shortestPath.get(2).getName());
     }
 
     private Graph init() {
