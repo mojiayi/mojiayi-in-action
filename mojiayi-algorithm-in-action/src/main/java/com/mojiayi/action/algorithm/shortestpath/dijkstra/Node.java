@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @author liguangri
@@ -53,22 +52,5 @@ public class Node {
 
     public void setAdjacentNodes(Map<Node, Integer> adjacentNodes) {
         this.adjacentNodes = adjacentNodes;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Node node = (Node) o;
-        return distance == node.distance && Objects.equals(name, node.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, distance);
     }
 }
