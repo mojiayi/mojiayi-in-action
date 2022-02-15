@@ -53,4 +53,22 @@ public class Node {
     public void setAdjacentNodes(Map<Node, Integer> adjacentNodes) {
         this.adjacentNodes = adjacentNodes;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Node)) {
+            return false;
+        }
+
+        Node node = (Node) o;
+        return super.equals(node);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
