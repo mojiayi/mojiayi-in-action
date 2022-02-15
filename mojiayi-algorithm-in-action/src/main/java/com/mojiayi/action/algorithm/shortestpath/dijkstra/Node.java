@@ -55,16 +55,20 @@ public class Node {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
             return true;
         }
-        if (!(o instanceof Node)) {
+
+        if (this.getClass() != obj.getClass()) {
             return false;
         }
 
-        Node node = (Node) o;
-        return super.equals(node);
+        Node node = (Node) obj;
+        return this.distance == node.distance && this.name.equals(node.name);
     }
 
     @Override
