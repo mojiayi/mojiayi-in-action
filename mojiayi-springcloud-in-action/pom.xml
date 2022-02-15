@@ -25,6 +25,7 @@
 
     <name>mojiayi-springcloud-in-action</name>
     <url>http://www.mojiayi.com</url>
+    <description>练习Spring Cloud生态中的功能特性</description>
 
     <dependencies>
 

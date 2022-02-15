@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mojiayi-design-pattern-in-action</artifactId>
+    <description>练习服务器开发工作中有实际用途的设计模式</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>

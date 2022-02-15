@@ -20,6 +20,7 @@
         <module>mojiayi-netty-in-action</module>
         <module>common-tools</module>
         <module>mojiayi-design-pattern-in-action</module>
+        <module>mojiayi-java-basis-in-action</module>
     </modules>
 
     <properties>

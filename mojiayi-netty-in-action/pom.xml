@@ -12,8 +12,8 @@
     <artifactId>mojiayi-netty-in-action</artifactId>
 
     <name>mojiayi-netty-in-action</name>
-    <!-- FIXME change it to the project's website -->
     <url>http://www.mojiayi.com</url>
+    <description>练习netty的常见功能特性</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
