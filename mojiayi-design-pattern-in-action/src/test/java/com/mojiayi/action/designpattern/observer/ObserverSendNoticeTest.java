@@ -1,6 +1,5 @@
 package com.mojiayi.action.designpattern.observer;
 
-import com.google.common.eventbus.EventBus;
 import org.junit.Test;
 
 public class ObserverSendNoticeTest {
@@ -14,10 +13,5 @@ public class ObserverSendNoticeTest {
 
         observerable.setState(1);
         observerable.notifyAllObservers();
-
-//        MojiayiEventListener eventListener = new MojiayiEventListener();
-//        EventBus eventBus = new EventBus();
-//        eventBus.register(eventListener);
-//        eventBus.post(new MojiayiNotifyEvent("159", "我的微信", "我的appid"));
     }
 }
