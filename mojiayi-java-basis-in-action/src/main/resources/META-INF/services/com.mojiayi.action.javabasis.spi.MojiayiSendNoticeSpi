@@ -1,0 +1,2 @@
+com.mojiayi.action.javabasis.spi.impl.SendNoticeByWechatSpi
+com.mojiayi.action.javabasis.spi.impl.SendNoticeBySmsSpi
