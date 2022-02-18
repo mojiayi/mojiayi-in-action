@@ -22,6 +22,7 @@
         <module>mojiayi-design-pattern-in-action</module>
         <module>mojiayi-java-basis-in-action</module>
         <module>mojiayi-dubbo-in-action</module>
+        <module>mojiayi-kafka-in-action</module>
     </modules>
 
     <properties>
