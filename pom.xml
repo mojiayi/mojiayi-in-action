@@ -33,6 +33,8 @@
         <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
         <mysql.version>8.0.27</mysql.version>
         <netty.version>4.1.73.Final</netty.version>
+        <spring-kafka.version>2.7.0</spring-kafka.version>
+        <scala-lang.version>2.13.7</scala-lang.version>
         <knife4j.version>3.0.3</knife4j.version>
         <swagger.version>1.5.22</swagger.version>
         <hutool.version>5.7.17</hutool.version>
@@ -76,6 +78,26 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-reflect</artifactId>
+                <version>${scala-lang.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.scala-lang</groupId>
+                <artifactId>scala-library</artifactId>
+                <version>${scala-lang.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>
