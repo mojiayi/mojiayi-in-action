@@ -30,8 +30,11 @@
         <maven.compiler.target>8</maven.compiler.target>
         <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
         <spring-cloud.version>2020.0.1</spring-cloud.version>
+        <mybatis-plus.version>3.5.1</mybatis-plus.version>
         <mybatis-spring-boot-starter.version>2.2.1</mybatis-spring-boot-starter.version>
         <mysql.version>8.0.27</mysql.version>
+        <druid.version>1.2.8</druid.version>
+        <pagehelper.version>1.4.1</pagehelper.version>
         <netty.version>4.1.73.Final</netty.version>
         <spring-kafka.version>2.7.0</spring-kafka.version>
         <scala-lang.version>2.13.7</scala-lang.version>
@@ -69,6 +72,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis-spring-boot-starter.version}</version>
@@ -78,6 +87,18 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
 
             <dependency>
