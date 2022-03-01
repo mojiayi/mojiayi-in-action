@@ -15,7 +15,7 @@ public class BubbleSortingNoTempDataSwap implements ISorting {
             for (int n = m + 1; n < size; n++) {
                 if (dataList[m] > dataList[n]) {
                     dataList[m] += dataList[n];
-                    dataList[m] -= dataList[n];
+                    dataList[n] = dataList[m] - dataList[n];
                     dataList[m] -= dataList[n];
                 }
             }
