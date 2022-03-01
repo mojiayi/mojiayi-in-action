@@ -41,7 +41,8 @@
         <spring-kafka.version>2.7.0</spring-kafka.version>
         <scala-lang.version>2.13.7</scala-lang.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <spring-security.version>1.1.1.RELEASE</spring-security.version>
+        <spring-security.version>5.6.2</spring-security.version>
+        <version.org.apache.log4j>2.16.0</version.org.apache.log4j>
         <knife4j.version>3.0.3</knife4j.version>
         <swagger.version>1.5.22</swagger.version>
         <hutool.version>5.7.17</hutool.version>
@@ -140,7 +141,7 @@
 
             <dependency>
                 <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-jwt</artifactId>
+                <artifactId>spring-security-web</artifactId>
                 <version>${spring-security.version}</version>
             </dependency>
 
