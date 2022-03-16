@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * 加权随机，实现思路来自Nacos源码。
+ * 加权随机，实现思路来自Ribbon源码。
  *
  * @author liguangri
  */
