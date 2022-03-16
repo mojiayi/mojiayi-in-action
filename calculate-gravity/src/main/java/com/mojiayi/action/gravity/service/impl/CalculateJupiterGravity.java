@@ -2,7 +2,6 @@ package com.mojiayi.action.gravity.service.impl;
 
 import com.mojiayi.action.gravity.enums.PlanetEnum;
 import com.mojiayi.action.gravity.service.ICalculateGravityService;
-import com.mojiayi.action.gravity.utils.CommonMethod;
 import com.mojiayi.action.gravity.vo.PlanetGravityVO;
 import org.springframework.stereotype.Service;
 
