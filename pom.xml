@@ -23,6 +23,7 @@
         <module>mojiayi-java-basis-in-action</module>
         <module>mojiayi-dubbo-in-action</module>
         <module>mojiayi-kafka-in-action</module>
+        <module>calculate-gravity</module>
     </modules>
 
     <properties>
