@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848 #配置Nacos地址
+      config:
+        server-addr: localhost:8848 #Nacos地址
+        file-extension: yml #这里我们获取的yaml格式的配置
