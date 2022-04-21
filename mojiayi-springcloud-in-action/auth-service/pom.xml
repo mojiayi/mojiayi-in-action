@@ -24,7 +24,6 @@
         <dependency>
             <groupId>com.mojiayi.action</groupId>
             <artifactId>common-tools</artifactId>
-            <version>1.0.0</version>
         </dependency>
 
         <dependency>
