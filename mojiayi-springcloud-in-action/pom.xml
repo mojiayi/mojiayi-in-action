@@ -18,7 +18,8 @@
     </modules>
 
     <properties>
-
+        <service-input-output.version>1.0.0</service-input-output.version>
+        <common-tools.version>1.0.0</common-tools.version>
     </properties>
 
     <artifactId>mojiayi-springcloud-in-action</artifactId>
@@ -28,7 +29,18 @@
     <url>http://www.mojiayi.com</url>
     <description>练习Spring Cloud生态中的功能特性</description>
 
-    <dependencies>
-
-    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.mojiayi.action</groupId>
+                <artifactId>service-input-output</artifactId>
+                <version>${service-input-output.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mojiayi.action</groupId>
+                <artifactId>common-tools</artifactId>
+                <version>${common-tools.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 </project>
