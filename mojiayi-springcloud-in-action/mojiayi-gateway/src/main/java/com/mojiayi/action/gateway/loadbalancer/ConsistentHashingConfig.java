@@ -1,8 +1,6 @@
 package com.mojiayi.action.gateway.loadbalancer;
 
 import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
-import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClients;
 import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
@@ -17,11 +15,6 @@ import org.springframework.core.env.Environment;
  * @author mojiayi
  * @since 2022/4/29 15:03
  */
-@LoadBalancerClients(
-        value = {
-                @LoadBalancerClient(name = "commission-service", configuration = ConsistentHashingConfig.class),
-                @LoadBalancerClient(name = "member-service", configuration = ConsistentHashingConfig.class)
-        })
 public class ConsistentHashingConfig {
     @Bean
     public ReactorLoadBalancer<ServiceInstance> serviceInstanceReactorLoadBalancer(Environment environment, LoadBalancerClientFactory loadBalancerClientFactory) {
