@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway.config;
+package com.mojiayi.action.gateway.swagger;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

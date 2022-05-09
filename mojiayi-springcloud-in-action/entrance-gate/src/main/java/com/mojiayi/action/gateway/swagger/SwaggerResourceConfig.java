@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway.config;
+package com.mojiayi.action.gateway.swagger;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

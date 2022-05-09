@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway.controller;
+package com.mojiayi.action.gateway.swagger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

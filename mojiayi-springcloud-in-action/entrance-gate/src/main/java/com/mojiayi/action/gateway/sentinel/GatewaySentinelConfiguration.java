@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway.config;
+package com.mojiayi.action.gateway.sentinel;
 
 import com.alibaba.csp.sentinel.adapter.gateway.sc.SentinelGatewayFilter;
 import com.alibaba.csp.sentinel.adapter.gateway.sc.exception.SentinelGatewayBlockExceptionHandler;
@@ -18,13 +18,13 @@ import java.util.List;
  * @author liguangri
  */
 @Configuration
-public class GatewayConfiguration {
+public class GatewaySentinelConfiguration {
 
     private final List<ViewResolver> viewResolvers;
     private final ServerCodecConfigurer serverCodecConfigurer;
 
-    public GatewayConfiguration(ObjectProvider<List<ViewResolver>> viewResolversProvider,
-                                ServerCodecConfigurer serverCodecConfigurer) {
+    public GatewaySentinelConfiguration(ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                                        ServerCodecConfigurer serverCodecConfigurer) {
         this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
         this.serverCodecConfigurer = serverCodecConfigurer;
     }
