@@ -5,6 +5,8 @@ server:
 spring:
   profiles:
     active: dev
+  main:
+    allow-bean-definition-overriding: true
   application:
     name: commission-service
   cloud:
@@ -14,3 +16,7 @@ spring:
 feign:
   sentinel:
     enabled: true
+
+customize:
+  consistent-hashing-urls:
+    - /api/member-service/members/detail

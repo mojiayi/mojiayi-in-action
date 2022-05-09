@@ -10,7 +10,7 @@ import org.springframework.web.reactive.function.client.WebClient;
  * @author mojiayi
  */
 @Configuration
-@LoadBalancerClient(name = "member-service", configuration = RandomLoadBalancerConfiguration.class)
+@LoadBalancerClient(name = "member-service", configuration = ConsistentHashingConfig.class)
 public class EnableCustomerLoadBalancer {
     @Bean
     @LoadBalanced
