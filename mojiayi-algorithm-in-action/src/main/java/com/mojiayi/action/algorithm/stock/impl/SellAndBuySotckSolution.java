@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class SellAndBuySotckSolution implements ISellAndBuyStock {
     @Override

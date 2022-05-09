@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 记住每次插入点，待排序数值如果大于上次插入的值，就从上一个插入点开始往后查找新插入点，如果小于，就从上一个插入点开始往前查找新插入点
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class InsertSortingRememberInsertPoint implements ISorting {
     @Override

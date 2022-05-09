@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Date;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class MojiayiJwtUtil {

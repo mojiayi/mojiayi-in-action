@@ -3,6 +3,7 @@ package com.mojiayi.action.commission.controller;
 import cn.hutool.http.HttpStatus;
 import com.github.xiaoymin.knife4j.annotations.ApiSupport;
 import com.google.common.base.Preconditions;
+import com.mojiayi.action.commission.api.CommissionApi;
 import com.mojiayi.action.commission.domain.CommissionDetail;
 import com.mojiayi.action.commission.response.QueryCommissionDetailResp;
 import com.mojiayi.action.commission.service.ICommissionService;
@@ -21,14 +22,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
-@ApiSupport(author = "liguangri")
 @Api(tags = "佣金")
 @RestController
 @RequestMapping("/commissions")
 @Slf4j
-public class CommissionController {
+public class CommissionController implements CommissionApi {
     @Autowired
     private ICommissionService commissionService;
 

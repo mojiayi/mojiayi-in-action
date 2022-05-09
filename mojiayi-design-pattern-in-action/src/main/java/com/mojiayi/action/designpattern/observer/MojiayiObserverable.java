@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class MojiayiObserverable {
     private int state;

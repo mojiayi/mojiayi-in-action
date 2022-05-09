@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * 加权轮询，不管有多少个服务节点，权重值分别是多少，每运行@{code sum(server1.weight+server2.weight+...+serverN.weight)/2}个轮次，各服务节点的动态权重恢复默认值，从头开始分配
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class WeightedRoundRobinScheduler implements IServerScheduler {
     @Override

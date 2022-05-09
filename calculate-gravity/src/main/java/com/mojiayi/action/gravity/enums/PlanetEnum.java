@@ -6,7 +6,7 @@ import com.mojiayi.action.gravity.vo.PlanetGravityVO;
 /**
  * 各星球代号和名称
  *
- * @author liguangri
+ * @author mojiayi
  */
 public enum PlanetEnum {
     /**

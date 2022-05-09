@@ -10,7 +10,7 @@ import java.io.Serializable;
  * 统一返回结果集
  *
  * @param <T>
- * @author liguangri
+ * @author mojiayi
  */
 @ApiModel(value = "统一返回结果集")
 public class CommonResp<T> implements Serializable {

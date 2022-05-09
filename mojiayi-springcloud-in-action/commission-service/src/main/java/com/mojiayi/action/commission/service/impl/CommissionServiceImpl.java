@@ -2,7 +2,7 @@ package com.mojiayi.action.commission.service.impl;
 
 import com.google.common.base.Preconditions;
 import com.mojiayi.action.commission.domain.CommissionDetail;
-import com.mojiayi.action.commission.integration.MemberServiceIntegration;
+import com.mojiayi.action.commission.integration.MemberApiClient;
 import com.mojiayi.action.commission.service.ICommissionService;
 import com.mojiayi.action.commission.service.mock.MockCommissionData;
 import com.mojiayi.action.common.tool.response.CommonResp;
@@ -12,13 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Service
 @Slf4j
 public class CommissionServiceImpl implements ICommissionService {
     @Autowired
-    private MemberServiceIntegration memberServiceIntegration;
+    private MemberApiClient memberServiceIntegration;
 
     @Override
     public CommissionDetail queryCommissionDetailByOrderId(Long orderId) {

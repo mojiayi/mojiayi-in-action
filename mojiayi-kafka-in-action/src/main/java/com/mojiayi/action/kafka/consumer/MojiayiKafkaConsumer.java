@@ -6,7 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class MojiayiKafkaConsumer {

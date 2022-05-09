@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class Graph {
     private Set<Node> nodes = new HashSet<>();

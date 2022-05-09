@@ -5,7 +5,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class Member implements Serializable {

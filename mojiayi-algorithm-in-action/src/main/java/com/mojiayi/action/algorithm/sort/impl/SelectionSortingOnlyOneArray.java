@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 不新建一个数组的选择排序算法实现方案
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class SelectionSortingOnlyOneArray implements ISorting {
     @Override

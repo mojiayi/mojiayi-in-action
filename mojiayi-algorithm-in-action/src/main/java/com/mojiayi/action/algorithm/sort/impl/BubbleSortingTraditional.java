@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 传统的冒泡排序算法实现方案，使用一个中间值存储被交换的数值
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class BubbleSortingTraditional implements ISorting {
     @Override

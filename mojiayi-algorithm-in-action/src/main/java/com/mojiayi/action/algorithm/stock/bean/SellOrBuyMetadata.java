@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 /**
  * 购买或出售股票的元数据
- * @author liguangri
+ * @author mojiayi
  */
 @EqualsAndHashCode(callSuper = true)
 @Data

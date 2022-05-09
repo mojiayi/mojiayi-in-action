@@ -2,7 +2,7 @@ package com.mojiayi.action.gravity.vo;
 
 /**
  * 星球信息和重力值
- * @author liguangri
+ * @author mojiayi
  */
 public class PlanetGravityVO {
     /**

@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 没有中间值存储被交换的数值，通过加减法交换两个数值
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class BubbleSortingNoTempDataSwap implements ISorting {
     @Override

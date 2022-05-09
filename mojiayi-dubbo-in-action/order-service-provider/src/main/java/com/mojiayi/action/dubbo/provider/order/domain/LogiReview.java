@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class LogiReview {

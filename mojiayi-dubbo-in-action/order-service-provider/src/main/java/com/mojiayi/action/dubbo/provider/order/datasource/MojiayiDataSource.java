@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import java.sql.SQLException;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Slf4j
 @Configuration

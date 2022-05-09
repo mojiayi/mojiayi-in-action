@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 分页查询时的返回结果，放在{@code CommonResp}中的data返回。
  *
- * @author liguangri
+ * @author mojiayi
  */
 @ApiModel(value = "分页查询返回结果集")
 public class PagingResp<T> implements Serializable {

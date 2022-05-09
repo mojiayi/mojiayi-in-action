@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class MojiayiRespUtil {
     public static void response(ServletResponse servletResponse, CommonResp<?> respContent) {

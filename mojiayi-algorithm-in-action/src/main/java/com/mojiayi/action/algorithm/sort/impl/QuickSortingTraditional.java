@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 使用递归实现的快速排序算法
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class QuickSortingTraditional implements ISorting {
     @Override

@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 以按权限值轮询的方式分配服务节点
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class ChooseByRoundRobinWeight implements IChooseServer {
     @Override

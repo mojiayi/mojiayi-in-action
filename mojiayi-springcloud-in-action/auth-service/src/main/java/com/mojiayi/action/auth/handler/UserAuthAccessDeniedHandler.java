@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class UserAuthAccessDeniedHandler implements AccessDeniedHandler {

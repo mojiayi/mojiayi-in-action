@@ -1,7 +1,7 @@
 package com.mojiayi.action.javabasis.reflection;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class DemoGitConfig {
     private String username;

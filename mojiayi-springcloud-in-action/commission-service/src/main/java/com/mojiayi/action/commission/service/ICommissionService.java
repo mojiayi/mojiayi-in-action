@@ -3,7 +3,7 @@ package com.mojiayi.action.commission.service;
 import com.mojiayi.action.commission.domain.CommissionDetail;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public interface ICommissionService {
     /**

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * 校验传入的参数是否合法，作为例子，只简单地校验用户id和购买数量
  *
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 @Order(1)

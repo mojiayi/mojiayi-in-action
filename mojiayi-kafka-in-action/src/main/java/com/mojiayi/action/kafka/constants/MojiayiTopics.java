@@ -1,7 +1,7 @@
 package com.mojiayi.action.kafka.constants;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public interface MojiayiTopics {
     String MOJIAYI_EVENTS = "mojiayi-events";

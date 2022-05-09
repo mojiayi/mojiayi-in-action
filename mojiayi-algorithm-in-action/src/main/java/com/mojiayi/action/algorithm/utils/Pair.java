@@ -1,7 +1,7 @@
 package com.mojiayi.action.algorithm.utils;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class Pair<T> {
     private final T item;

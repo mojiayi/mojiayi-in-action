@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.shortestpath.dijkstra.Graph;
 import com.mojiayi.action.algorithm.shortestpath.dijkstra.Node;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class Floyd implements IFindShortestPath {
     @Override

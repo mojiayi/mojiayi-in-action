@@ -3,7 +3,7 @@ package com.mojiayi.action.member.service;
 import com.mojiayi.action.member.domain.Member;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public interface IMemberService {
     /**

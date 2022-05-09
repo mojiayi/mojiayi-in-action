@@ -1,7 +1,7 @@
 package com.mojiayi.action.designpattern.strategy;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public interface ISendNoticeStrategy {
     NoticeChannelEnum gainNoticeChannel();

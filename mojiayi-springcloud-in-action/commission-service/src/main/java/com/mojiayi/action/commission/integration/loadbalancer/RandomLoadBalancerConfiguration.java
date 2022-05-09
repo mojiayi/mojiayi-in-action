@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class RandomLoadBalancerConfiguration {
     @Bean

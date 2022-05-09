@@ -3,7 +3,7 @@ package com.mojiayi.action.algorithm.sort;
 /**
  * 排序算法
  *
- * @author liguangri
+ * @author mojiayi
  */
 public interface ISorting {
     /**

@@ -10,7 +10,7 @@ import java.util.Random;
 /**
  * 校验库存是否充足，作为例子，生成一个随机的库存量数值，与每次传入的购买数量相比较
  *
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 @Order(2)

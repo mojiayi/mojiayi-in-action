@@ -6,7 +6,7 @@ import com.mojiayi.action.gravity.vo.PlanetGravityVO;
 import org.springframework.stereotype.Service;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Service
 public class CalculateMarsGravity implements ICalculateGravityService {

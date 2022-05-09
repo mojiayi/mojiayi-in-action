@@ -6,24 +6,26 @@
         <groupId>com.mojiayi.action</groupId>
         <artifactId>mojiayi-in-action</artifactId>
         <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
+        <module>mojiayi-gateway</module>
         <module>auth-service</module>
+        <module>member-api</module>
         <module>member-service</module>
-        <module>entrance-gate</module>
+        <module>commission-api</module>
         <module>commission-service</module>
-        <module>service-input-output</module>
     </modules>
 
     <properties>
         <service-input-output.version>1.0.0</service-input-output.version>
-        <common-tools.version>1.0.0</common-tools.version>
+        <common-tools.version>1.0.0-SNAPSHOT</common-tools.version>
     </properties>
 
     <artifactId>mojiayi-springcloud-in-action</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>mojiayi-springcloud-in-action</name>
     <url>http://www.mojiayi.com</url>
@@ -31,11 +33,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>com.mojiayi.action</groupId>
-                <artifactId>service-input-output</artifactId>
-                <version>${service-input-output.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.mojiayi.action</groupId>
                 <artifactId>common-tools</artifactId>

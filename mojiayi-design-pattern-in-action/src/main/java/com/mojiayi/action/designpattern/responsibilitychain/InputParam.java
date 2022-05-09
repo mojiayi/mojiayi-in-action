@@ -1,7 +1,7 @@
 package com.mojiayi.action.designpattern.responsibilitychain;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class InputParam {
     private Long userId;

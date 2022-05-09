@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 按具体实现类中的方式选择服务节点
  *
- * @author liguangri
+ * @author mojiayi
  */
 public interface IChooseServer {
     /**

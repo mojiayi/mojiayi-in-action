@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * 计算各星球重力值的应用程序
  *
- * @author liguangri
+ * @author mojiayi
  */
 @SpringBootApplication
 public class CalculateGravityApplication {

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Configuration
 @LoadBalancerClient(name = "member-service", configuration = RandomLoadBalancerConfiguration.class)

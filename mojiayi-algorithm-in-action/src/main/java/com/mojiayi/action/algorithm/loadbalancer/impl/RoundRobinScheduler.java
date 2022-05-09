@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 普通轮询
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class RoundRobinScheduler implements IServerScheduler {
     private int currentServerIndex = -1;

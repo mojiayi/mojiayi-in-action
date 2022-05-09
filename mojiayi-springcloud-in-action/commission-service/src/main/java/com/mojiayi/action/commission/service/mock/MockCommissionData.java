@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Slf4j
 public class MockCommissionData {
@@ -26,19 +26,19 @@ public class MockCommissionData {
             mockDataMap.put(detail.getOrderId(), detail);
 
             CommissionDetail detail2 = new CommissionDetail();
-            detail.setOrderId(2L);
-            detail.setAmount(new BigDecimal(200));
-            detail.setMemberId(234L);
+            detail2.setOrderId(2L);
+            detail2.setAmount(new BigDecimal(200));
+            detail2.setMemberId(234L);
             // 会员名从会员服务获取
-            detail.setObtainTime(DatePattern.NORM_DATETIME_FORMAT.parse("2021-11-12 10:00:00"));
+            detail2.setObtainTime(DatePattern.NORM_DATETIME_FORMAT.parse("2021-11-12 10:00:00"));
             mockDataMap.put(detail2.getOrderId(), detail2);
 
             CommissionDetail detail3 = new CommissionDetail();
-            detail.setOrderId(3L);
-            detail.setAmount(new BigDecimal(300));
-            detail.setMemberId(345L);
+            detail3.setOrderId(3L);
+            detail3.setAmount(new BigDecimal(300));
+            detail3.setMemberId(345L);
             // 会员名从会员服务获取
-            detail.setObtainTime(DatePattern.NORM_DATETIME_FORMAT.parse("2021-11-13 10:00:00"));
+            detail3.setObtainTime(DatePattern.NORM_DATETIME_FORMAT.parse("2021-11-13 10:00:00"));
             mockDataMap.put(detail3.getOrderId(), detail3);
         } catch (Exception e) {
             log.error("生成模拟佣金数据报错", e);

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class ChooseByRandomWeight implements IChooseServer {
     @Override

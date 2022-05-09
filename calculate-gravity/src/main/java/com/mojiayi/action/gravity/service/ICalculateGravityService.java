@@ -6,7 +6,7 @@ import com.mojiayi.action.gravity.vo.PlanetGravityVO;
 /**
  * 计算各星球重力的服务
  *
- * @author liguangri
+ * @author mojiayi
  */
 public interface ICalculateGravityService {
     /**

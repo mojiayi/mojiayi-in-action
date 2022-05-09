@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 服务节点基本信息，仅用于试验各种负载均衡分配算法，所以信息很少。
  *
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class ServerInfo {

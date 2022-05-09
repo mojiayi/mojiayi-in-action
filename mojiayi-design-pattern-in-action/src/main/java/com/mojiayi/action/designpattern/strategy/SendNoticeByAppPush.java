@@ -3,7 +3,7 @@ package com.mojiayi.action.designpattern.strategy;
 import org.springframework.stereotype.Component;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class SendNoticeByAppPush implements ISendNoticeStrategy{

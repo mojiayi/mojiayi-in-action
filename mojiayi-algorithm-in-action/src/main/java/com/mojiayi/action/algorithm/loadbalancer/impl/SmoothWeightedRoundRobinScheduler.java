@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * 平滑权重轮询
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class SmoothWeightedRoundRobinScheduler implements IServerScheduler {
     @Override

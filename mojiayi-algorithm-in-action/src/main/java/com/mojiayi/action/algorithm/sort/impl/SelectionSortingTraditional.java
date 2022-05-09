@@ -5,7 +5,7 @@ import com.mojiayi.action.algorithm.sort.ISorting;
 /**
  * 传统的选择排序算法实现方案，有两个for循环，使用2个数组
  *
- * @author liguangri
+ * @author mojiayi
  */
 public class SelectionSortingTraditional implements ISorting {
     @Override

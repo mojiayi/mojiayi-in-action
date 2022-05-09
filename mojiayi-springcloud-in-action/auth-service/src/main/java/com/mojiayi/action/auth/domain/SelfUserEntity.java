@@ -3,7 +3,7 @@ package com.mojiayi.action.auth.domain;
 import java.util.List;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class SelfUserEntity {
     private Long userId;

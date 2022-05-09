@@ -1,7 +1,7 @@
 package com.mojiayi.action.algorithm.relationnetwork.impl;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class TraversalRelationNetworkImpl {
 }

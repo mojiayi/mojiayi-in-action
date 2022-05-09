@@ -3,7 +3,7 @@ package com.mojiayi.action.designpattern.responsibilitychain;
 import com.mojiayi.action.common.tool.response.CommonResp;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public abstract class AbstractHandler {
     private AbstractHandler nextHandler;

@@ -1,7 +1,7 @@
 package com.mojiayi.action.algorithm.relationnetwork.bean;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class NodeInfo {
 }

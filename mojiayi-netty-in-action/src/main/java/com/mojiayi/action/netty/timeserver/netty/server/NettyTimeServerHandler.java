@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class NettyTimeServerHandler extends ChannelInboundHandlerAdapter {
     @Override

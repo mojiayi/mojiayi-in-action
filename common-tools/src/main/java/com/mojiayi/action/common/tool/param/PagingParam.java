@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @ApiModel(value = "分页查询公共参数")
 public class PagingParam implements Serializable {

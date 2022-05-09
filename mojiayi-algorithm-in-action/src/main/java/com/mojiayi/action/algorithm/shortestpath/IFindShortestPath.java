@@ -4,7 +4,7 @@ import com.mojiayi.action.algorithm.shortestpath.dijkstra.Graph;
 import com.mojiayi.action.algorithm.shortestpath.dijkstra.Node;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public interface IFindShortestPath {
     Graph findShortestPath(Graph graph, Node sourceNode);

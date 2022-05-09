@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class MojiayiProxy {
     public static void main(String[] args) {

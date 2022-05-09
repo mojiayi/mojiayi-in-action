@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class SendNoticeService implements ApplicationContextAware {

@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Slf4j
 public class MockMemberData {

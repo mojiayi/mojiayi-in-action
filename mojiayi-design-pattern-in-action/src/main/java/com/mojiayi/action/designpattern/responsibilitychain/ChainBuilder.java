@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Component
 public class ChainBuilder {

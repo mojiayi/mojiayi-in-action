@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class CommissionDetail implements Serializable {

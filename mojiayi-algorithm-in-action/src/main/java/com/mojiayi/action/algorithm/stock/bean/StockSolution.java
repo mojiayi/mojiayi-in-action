@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * 购买或出售股票的方案
  *
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class StockSolution {

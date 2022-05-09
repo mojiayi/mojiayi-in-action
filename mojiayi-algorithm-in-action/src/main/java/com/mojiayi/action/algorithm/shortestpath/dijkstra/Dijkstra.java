@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class Dijkstra implements IFindShortestPath {
     @Override

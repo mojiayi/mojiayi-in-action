@@ -5,7 +5,7 @@ import lombok.Data;
 /**
  * 股票元数据
  *
- * @author liguangri
+ * @author mojiayi
  */
 @Data
 public class StockMetadata {

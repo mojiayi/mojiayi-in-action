@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * leetcode上的最佳股票买卖方案
  *
- * @author liguangri
+ * @author mojiayi
  */
 public interface ISellAndBuyStock {
     /**

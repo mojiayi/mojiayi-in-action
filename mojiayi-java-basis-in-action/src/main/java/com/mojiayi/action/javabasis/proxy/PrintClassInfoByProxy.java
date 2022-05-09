@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class PrintClassInfoByProxy {
     public static void main(String[] args) {

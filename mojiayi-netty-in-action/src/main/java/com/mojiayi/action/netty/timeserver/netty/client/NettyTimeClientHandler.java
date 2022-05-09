@@ -8,7 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author liguangri
+ * @author mojiayi
  */
 public class NettyTimeClientHandler extends ChannelInboundHandlerAdapter {
     private byte[] req;
