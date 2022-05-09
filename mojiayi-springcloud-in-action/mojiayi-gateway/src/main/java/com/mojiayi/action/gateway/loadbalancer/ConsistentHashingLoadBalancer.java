@@ -60,42 +60,42 @@ public class ConsistentHashingLoadBalancer extends RandomLoadBalancer {
         }
         String[] pairs = query.split("&");
         String[] keyAndValue = null;
-        String scenarioId = null;
+        String memberId = null;
         for (String pair : pairs) {
             keyAndValue = pair.split("=");
             if (MEMBER_ID.equals(keyAndValue[0])) {
-                scenarioId = keyAndValue[1];
+                memberId = keyAndValue[1];
                 break;
             }
         }
-        if (StringUtils.isEmpty(scenarioId)) {
+        if (StringUtils.isEmpty(memberId)) {
             return super.choose(request);
         }
 
         var supplier = serviceInstanceListSupplierProvider
                 .getIfAvailable(NoopServiceInstanceListSupplier::new);
-        String finalScenarioId = scenarioId;
+        String finalmemberId = memberId;
         return supplier.get(request).next()
-                .map(serviceInstances -> processInstanceResponse(supplier, serviceInstances, finalScenarioId));
+                .map(serviceInstances -> processInstanceResponse(supplier, serviceInstances, finalmemberId));
     }
 
     private Response<ServiceInstance> processInstanceResponse(ServiceInstanceListSupplier supplier,
-                                                              List<ServiceInstance> serviceInstances, String scenarioId) {
-        Response<ServiceInstance> serviceInstanceResponse = getInstanceResponse(serviceInstances, scenarioId);
+                                                              List<ServiceInstance> serviceInstances, String memberId) {
+        Response<ServiceInstance> serviceInstanceResponse = getInstanceResponse(serviceInstances, memberId);
         if (supplier instanceof SelectedInstanceCallback && serviceInstanceResponse.hasServer()) {
             ((SelectedInstanceCallback) supplier).selectedServiceInstance(serviceInstanceResponse.getServer());
         }
         return serviceInstanceResponse;
     }
 
-    private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, String scenarioId) {
+    private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, String memberId) {
         if (CollectionUtils.isEmpty(instances)) {
             log.info("No servers available for service: " + serviceId);
             return new EmptyResponse();
         }
 
-        int scenarioIdHashCode = scenarioId.hashCode();
-        int mode = Hashing.consistentHash(scenarioIdHashCode, instances.size());
+        int memberIdHashCode = memberId.hashCode();
+        int mode = Hashing.consistentHash(memberIdHashCode, instances.size());
         return new DefaultResponse(instances.get(mode));
     }
 }
