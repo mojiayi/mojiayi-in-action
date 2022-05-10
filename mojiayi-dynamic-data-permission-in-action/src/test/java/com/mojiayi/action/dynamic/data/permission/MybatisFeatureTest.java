@@ -1,12 +1,13 @@
 package com.mojiayi.action.dynamic.data.permission;
 
 
-import com.mojiayi.action.common.tool.response.PagingResp;
-import com.mojiayi.action.dynamic.data.permission.domain.LogiReview;
-import com.mojiayi.action.dynamic.data.permission.service.OrderDetailService;
+import com.mojiayi.action.dynamic.data.permission.constants.MyConstants;
+import com.mojiayi.action.dynamic.data.permission.domain.UserInfo;
+import com.mojiayi.action.dynamic.data.permission.service.UserInfoService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.MDC;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -16,24 +17,33 @@ import javax.annotation.Resource;
 @SpringBootTest(classes = MojiayiDynamicDataPermissionProvider.class)
 public class MybatisFeatureTest {
     @Resource
-    private OrderDetailService orderDetailService;
+    private UserInfoService userInfoService;
 
     @Test
-    public void testSelectByOrderId() {
-        String orderId = "988A45122D7760E344069E794C42D90D";
-        LogiReview logiReview = orderDetailService.selectByOrderId(orderId);
-        Assert.assertNotNull(logiReview);
-        Assert.assertEquals("00EA17C9DA7642E9A8004C925C338981", logiReview.getReviewId());
-    }
+    public void testSelectByUserId() {
+        String tenantId = "1";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+        long userId = 2;
+        UserInfo userInfo = userInfoService.selectByUserId(userId);
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals("用户1-1", userInfo.getUsername());
+        Assert.assertEquals("租户1", userInfo.getTenantsName());
 
-    @Test
-    public void testSelectAvailableRecord() {
-        int pageIndex = 1;
-        int pageSize = 10;
-        PagingResp<LogiReview> resp = orderDetailService.selectAvailableRecord(pageIndex, pageSize);
-        Assert.assertNotNull(resp);
-        Assert.assertEquals(20, resp.getTotalItem().longValue());
-        Assert.assertEquals("7DF473E758594DE8B19B7459C6299076", resp.getList().get(0).getReviewId());
-        Assert.assertEquals("2A34916BD66E456FB46319276934290D", resp.getList().get(8).getReviewId());
+        tenantId = "2";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+
+        userId = 3;
+        userInfo = userInfoService.selectByUserId(userId);
+        Assert.assertNull(userInfo);
+
+        userId = 8;
+        userInfo = userInfoService.selectByUserId(userId);
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals("用户2-4", userInfo.getUsername());
+        Assert.assertEquals("租户2", userInfo.getTenantsName());
+
+        userId = 10;
+        userInfo = userInfoService.selectByUserId(userId);
+        Assert.assertNull(userInfo);
     }
 }

@@ -1,7 +1,7 @@
 package com.mojiayi.action.dynamic.data.permission.datasource;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import com.mojiayi.action.dynamic.data.permission.dao.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -27,7 +27,7 @@ import java.sql.SQLException;
 @Configuration
 @EnableConfigurationProperties(DruidConfig.class)
 @EnableTransactionManagement
-@MapperScan(basePackages = {"com.mojiayi.action.dubbo.provider.order.dao.**"}, sqlSessionTemplateRef = "mojiayiSqlSessionTemplate", markerInterface = BaseMapper.class)
+@MapperScan(basePackages = {"com.mojiayi.action.dynamic.data.permission.dao.**"}, sqlSessionTemplateRef = "mojiayiSqlSessionTemplate", markerInterface = BaseMapper.class)
 public class MojiayiDataSource {
     @Value("${spring.datasource.db.url}")
     private String dbUrl;
