@@ -21,7 +21,7 @@
         <module>common-tools</module>
         <module>mojiayi-design-pattern-in-action</module>
         <module>mojiayi-java-basis-in-action</module>
-        <module>mojiayi-dubbo-in-action</module>
+        <module>mojiayi-dynamic-data-permission-in-action</module>
         <module>mojiayi-kafka-in-action</module>
         <module>calculate-gravity</module>
     </modules>
