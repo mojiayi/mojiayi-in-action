@@ -33,7 +33,7 @@ public class EnableMyBatisPlusExtensions {
             if (!StringUtils.hasLength(tenantId)) {
                 return new NullValue();
             }
-            return new LongValue(1);
+            return new LongValue(tenantId);
         }));
         return interceptor;
     }

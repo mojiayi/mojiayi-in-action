@@ -13,9 +13,9 @@ public class UserInfo {
 
     private String username;
 
-    private String tenantsName;
+    private String tenantName;
 
-    private Long tenantsId;
+    private Long tenantId;
 
     private Date createTime;
 

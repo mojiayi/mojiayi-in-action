@@ -4,14 +4,14 @@
     <resultMap id="BaseResultMap" type="com.mojiayi.action.dynamic.data.permission.domain.UserInfo">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
-        <result column="tenants_name" jdbcType="VARCHAR" property="tenantsName"/>
-        <result column="tenants_id" jdbcType="BIGINT" property="tenantsId"/>
+        <result column="tenant_name" jdbcType="VARCHAR" property="tenantName"/>
+        <result column="tenant_id" jdbcType="BIGINT" property="tenantId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username, tenants_name, tenants_id, create_time, update_time, delete_flag
+        id, username, tenant_name, tenant_id, create_time, update_time, delete_flag
     </sql>
     <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select

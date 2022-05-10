@@ -27,7 +27,7 @@ public class MybatisFeatureTest {
         UserInfo userInfo = userInfoService.selectByUserId(userId);
         Assert.assertNotNull(userInfo);
         Assert.assertEquals("用户1-1", userInfo.getUsername());
-        Assert.assertEquals("租户1", userInfo.getTenantsName());
+        Assert.assertEquals("租户1", userInfo.getTenantName());
 
         tenantId = "2";
         MDC.put(MyConstants.TENANT_ID, tenantId);
@@ -40,7 +40,7 @@ public class MybatisFeatureTest {
         userInfo = userInfoService.selectByUserId(userId);
         Assert.assertNotNull(userInfo);
         Assert.assertEquals("用户2-4", userInfo.getUsername());
-        Assert.assertEquals("租户2", userInfo.getTenantsName());
+        Assert.assertEquals("租户2", userInfo.getTenantName());
 
         userId = 10;
         userInfo = userInfoService.selectByUserId(userId);

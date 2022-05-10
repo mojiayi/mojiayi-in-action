@@ -1,38 +1,6 @@
 spring:
   datasource:
-    db:
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
-      username: root
-      password: V-YN]18uPKcf4NR1B?sa
-    druid:
-      keep-Alive: true
-      initial-size: 5
-      min-idle: 5
-      max-active: 20
-      # 配置获取连接等待超时的时间
-      max-wait: 60000
-      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
-      time-between-eviction-runs-millis: 60000
-      # 配置一个连接在池中最小生存的时间，单位是毫秒
-      min-evictable-idle-time-millis: 300000
-      validation-query: SELECT 1 FROM DUAL
-      test-while-idle: true
-      test-on-borrow: false
-      test-on-return: false
-      # 连接泄露检查，打开removeAbandoned功能 , 连接从连接池借出后，长时间不归还，将触发强制回连接。回收周期随timeBetweenEvictionRunsMillis进行，如果连接为从连接池借出状态，并且未执行任何sql，并且从借出时间起已超过removeAbandonedTimeout时间，则强制归还连接到连接池中。
-      remove-abandoned: true
-      # 超时时间，秒
-      remove-abandoned-timeout: 80
-      # 关闭abanded连接时输出错误日志，这样出现连接泄露时可以通过错误日志定位忘记关闭连接的位置
-      log-abandoned: true
-      # 打开PSCache，并且指定每个连接上PSCache的大小
-      pool-prepared-statements: true
-      max-pool-prepared-statement-per-connection-size: 20
-      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
-      filters: stat,slf4j
-      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
-      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
-      use-global-data-source-stat: true
-      web-stat-filter:
-        enabled: false
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: V-YN]18uPKcf4NR1B?sa
