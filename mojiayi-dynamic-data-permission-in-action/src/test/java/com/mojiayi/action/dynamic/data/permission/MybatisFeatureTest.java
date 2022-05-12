@@ -45,5 +45,11 @@ public class MybatisFeatureTest {
         userId = 10;
         userInfo = userInfoService.selectByUserId(userId);
         Assert.assertNull(userInfo);
+
+        userId = 15;
+        userInfo = userInfoService.selectByUserIdFromWorld(userId);
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals("用户2-4world", userInfo.getUsername());
+        Assert.assertEquals("租户2world", userInfo.getTenantName());
     }
 }

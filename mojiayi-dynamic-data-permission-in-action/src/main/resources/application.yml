@@ -4,14 +4,14 @@ spring:
     dynamic:
       primary: db1
       datasource:
-        db1:
+        datasource-sys:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
           username: root
           password: V-YN]18uPKcf4NR1B?sa
-        db2:
+        datasource-world:
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://localhost:3306/world?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
           username: root
           password: V-YN]18uPKcf4NR1B?sa
       druid:
