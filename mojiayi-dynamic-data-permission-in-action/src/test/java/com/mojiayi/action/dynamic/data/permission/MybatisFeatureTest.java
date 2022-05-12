@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = MojiayiDynamicDataPermissionProvider.class)
@@ -51,5 +52,14 @@ public class MybatisFeatureTest {
         Assert.assertNotNull(userInfo);
         Assert.assertEquals("用户2-4world", userInfo.getUsername());
         Assert.assertEquals("租户2world", userInfo.getTenantName());
+    }
+
+    @Test
+    public void testPagination() {
+        String tenantId = "2";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+        List<UserInfo> userInfoList = userInfoService.pagination(1, 3);
+        Assert.assertNotNull(userInfoList);
+        Assert.assertEquals(1, userInfoList.size());
     }
 }

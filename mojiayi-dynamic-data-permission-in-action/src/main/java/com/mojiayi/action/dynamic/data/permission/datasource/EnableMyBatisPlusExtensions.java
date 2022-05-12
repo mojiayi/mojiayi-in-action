@@ -1,6 +1,8 @@
 package com.mojiayi.action.dynamic.data.permission.datasource;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerInterceptor;
 import com.mojiayi.action.dynamic.data.permission.constants.MyConstants;
 import net.sf.jsqlparser.expression.LongValue;
@@ -35,6 +37,7 @@ public class EnableMyBatisPlusExtensions {
             }
             return new LongValue(tenantId);
         }));
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
 }
