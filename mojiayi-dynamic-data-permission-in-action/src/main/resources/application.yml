@@ -45,3 +45,6 @@ spring:
         use-global-data-source-stat: true
         web-stat-filter:
           enabled: false
+logging:
+  level:
+    com.mojiayi.action.dynamic.data.permission.dao: debug
