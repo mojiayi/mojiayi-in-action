@@ -1,5 +1,6 @@
 package com.mojiayi.action.commission.integration.loadbalancer;
 
+import com.mojiayi.action.cloud.loadbalancer.ConsistentHashingConfig;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.loadbalancer.annotation.LoadBalancerClient;
 import org.springframework.context.annotation.Bean;

@@ -1,8 +1,7 @@
-package com.mojiayi.action.commission.integration.loadbalancer;
+package com.mojiayi.action.cloud.loadbalancer;
 
 import com.google.common.hash.Hashing;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -12,6 +11,7 @@ import org.springframework.cloud.loadbalancer.core.RandomLoadBalancer;
 import org.springframework.cloud.loadbalancer.core.SelectedInstanceCallback;
 import org.springframework.cloud.loadbalancer.core.ServiceInstanceListSupplier;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
@@ -54,47 +54,47 @@ public class ConsistentHashingLoadBalancer extends RandomLoadBalancer {
             return super.choose(request);
         }
         String query = clientRequest.getUrl().getQuery();
-        if (StringUtils.isEmpty(query)) {
+        if (!StringUtils.hasLength(query)) {
             return super.choose(request);
         }
         String[] pairs = query.split("&");
         String[] keyAndValue = null;
-        String scenarioId = null;
+        String memberId = null;
         for (String pair : pairs) {
             keyAndValue = pair.split("=");
             if (MEMBER_ID.equals(keyAndValue[0])) {
-                scenarioId = keyAndValue[1];
+                memberId = keyAndValue[1];
                 break;
             }
         }
-        if (StringUtils.isEmpty(scenarioId)) {
+        if (!StringUtils.hasLength(memberId)) {
             return super.choose(request);
         }
 
         var supplier = serviceInstanceListSupplierProvider
                 .getIfAvailable(NoopServiceInstanceListSupplier::new);
-        String finalScenarioId = scenarioId;
+        String finalMemberId = memberId;
         return supplier.get(request).next()
-                .map(serviceInstances -> processInstanceResponse(supplier, serviceInstances, finalScenarioId));
+                .map(serviceInstances -> processInstanceResponse(supplier, serviceInstances, finalMemberId));
     }
 
     private Response<ServiceInstance> processInstanceResponse(ServiceInstanceListSupplier supplier,
-                                                              List<ServiceInstance> serviceInstances, String scenarioId) {
-        Response<ServiceInstance> serviceInstanceResponse = getInstanceResponse(serviceInstances, scenarioId);
+                                                              List<ServiceInstance> serviceInstances, String memberId) {
+        Response<ServiceInstance> serviceInstanceResponse = getInstanceResponse(serviceInstances, memberId);
         if (supplier instanceof SelectedInstanceCallback && serviceInstanceResponse.hasServer()) {
             ((SelectedInstanceCallback) supplier).selectedServiceInstance(serviceInstanceResponse.getServer());
         }
         return serviceInstanceResponse;
     }
 
-    private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, String scenarioId) {
+    private Response<ServiceInstance> getInstanceResponse(List<ServiceInstance> instances, String memberId) {
         if (CollectionUtils.isEmpty(instances)) {
             log.info("No servers available for service: " + serviceId);
             return new EmptyResponse();
         }
 
-        int scenarioIdHashCode = scenarioId.hashCode();
-        int mode = Hashing.consistentHash(scenarioIdHashCode, instances.size());
+        int memberIdHashCode = memberId.hashCode();
+        int mode = Hashing.consistentHash(memberIdHashCode, instances.size());
         return new DefaultResponse(instances.get(mode));
     }
 }

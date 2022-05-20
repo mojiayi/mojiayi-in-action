@@ -17,6 +17,7 @@
         <module>member-service</module>
         <module>commission-api</module>
         <module>commission-service</module>
+        <module>mojiayi-cloud-tool</module>
     </modules>
 
     <properties>

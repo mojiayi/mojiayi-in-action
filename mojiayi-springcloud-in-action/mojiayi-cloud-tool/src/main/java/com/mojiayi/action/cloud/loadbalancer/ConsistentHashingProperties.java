@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway.loadbalancer;
+package com.mojiayi.action.cloud.loadbalancer;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

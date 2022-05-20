@@ -1,4 +1,4 @@
-package com.mojiayi.action.commission.integration.loadbalancer;
+package com.mojiayi.action.cloud.loadbalancer;
 
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.loadbalancer.core.ReactorLoadBalancer;
