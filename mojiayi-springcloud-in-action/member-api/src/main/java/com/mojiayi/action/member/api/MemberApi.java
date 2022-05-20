@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 会员操作
  * </p>
  *
- * angri.li
- * @since 2022/5/9 15:52
+ * @author mojiayi
  */
 public interface MemberApi {
     @GetMapping("/detail")

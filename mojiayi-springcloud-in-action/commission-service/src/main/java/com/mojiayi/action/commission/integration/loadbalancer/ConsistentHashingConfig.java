@@ -13,7 +13,6 @@ import org.springframework.core.env.Environment;
  * </p>
  *
  * @author mojiayi
- * @since 2022/4/29 15:03
  */
 public class ConsistentHashingConfig {
     @Bean

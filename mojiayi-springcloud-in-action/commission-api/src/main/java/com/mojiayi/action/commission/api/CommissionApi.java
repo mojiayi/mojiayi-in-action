@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
  * </p>
  *
  * @author mojiayi
- * @since 2022/5/9 15:36
  */
 public interface CommissionApi {
     @GetMapping("/order-id/{orderId}")

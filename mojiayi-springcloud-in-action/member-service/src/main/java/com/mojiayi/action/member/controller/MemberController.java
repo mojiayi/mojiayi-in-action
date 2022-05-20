@@ -29,7 +29,7 @@ public class MemberController implements MemberApi {
     @Autowired
     private IMemberService memberService;
 
-    @ApiOperationSupport(author = "liguangri")
+    @ApiOperationSupport(author = "mojiayi")
     @ApiOperation(value = "查会员详情")
     @ApiImplicitParam(name = "memberId", value = "会员id", dataType = "Long", required = true)
     @GetMapping("/detail")

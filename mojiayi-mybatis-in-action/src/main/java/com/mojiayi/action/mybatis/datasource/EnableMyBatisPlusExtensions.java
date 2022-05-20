@@ -19,7 +19,6 @@ import org.springframework.util.StringUtils;
  * </p>
  *
  * @author mojiayi
- * @since 2022/5/10 17:45
  */
 @Configuration
 @MapperScan("com.mojiayi.action.dynamic.data.permission.dao")

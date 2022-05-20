@@ -22,7 +22,6 @@ import java.util.List;
  * </p>
  *
  * @author mojiayi
- * @since 2022/4/29 11:40
  */
 @Slf4j
 public class ConsistentHashingLoadBalancer extends RandomLoadBalancer {
