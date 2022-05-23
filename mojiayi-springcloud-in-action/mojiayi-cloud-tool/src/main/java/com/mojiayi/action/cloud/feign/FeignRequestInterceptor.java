@@ -3,6 +3,7 @@ package com.mojiayi.action.cloud.feign;
 import com.mojiayi.action.cloud.constant.MyConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,6 +26,7 @@ import java.util.UUID;
  * @author mojiayi
  */
 @Component
+@Slf4j
 public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate requestTemplate) {
@@ -51,10 +53,18 @@ public class FeignRequestInterceptor implements RequestInterceptor {
         if (!StringUtils.hasLength(traceId)) {
             // 网关层没有传递traceId过来，就生成一个新的
             traceId = UUID.randomUUID().toString().replace("-", "");
-            ;
             MDC.put(MyConstant.TRACE_ID, traceId);
         }
         requestTemplate.header(MyConstant.TRACE_ID, traceId);
+
+        // 把从本地线程空间获得的角色数据权限配置存入request header，传递给下游服务
+        String dataPermissionConfig = MDC.get(MyConstant.DATA_PERMISSION);
+        if (log.isDebugEnabled()) {
+            log.debug("当前用户的数据权限={}", dataPermissionConfig);
+        }
+        if (StringUtils.hasLength(dataPermissionConfig)) {
+            requestTemplate.header(MyConstant.DATA_PERMISSION, dataPermissionConfig);
+        }
     }
 
     private Map<String, String> getHeaders(HttpServletRequest request) {
