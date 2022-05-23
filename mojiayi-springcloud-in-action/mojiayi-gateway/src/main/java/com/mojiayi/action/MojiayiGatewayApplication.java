@@ -1,4 +1,4 @@
-package com.mojiayi.action.gateway;
+package com.mojiayi.action;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
