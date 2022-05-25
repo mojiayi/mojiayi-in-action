@@ -59,7 +59,7 @@ spring:
           enabled: false
   logging:
     level:
-      com.mojiayi.action.mybatis.dao: debug
+      com.mojiayi.action.member.dao: debug
 feign:
   sentinel:
     enabled: true

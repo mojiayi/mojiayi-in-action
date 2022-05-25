@@ -47,4 +47,4 @@ spring:
           enabled: false
 logging:
   level:
-    com.mojiayi.action.dynamic.data.permission.dao: debug
+    com.mojiayi.action.mybatis.dao: debug
