@@ -114,6 +114,7 @@ public class RowLevelIsolationBaseWrapper {
      * 获取当前用户拥有角色所配置的数据属性
      */
     private static List<DataPermissionConfig> getAllIsolationFields() {
+        // 模拟自测时，可以不从本地线程空间获取，直接用 mockIsolationFields 临时提供数据属性配置
         String dataPermissionStr = MDC.get(MyConstant.DATA_PERMISSION);
         if (StringUtils.isBlank(dataPermissionStr)) {
             // 上游没有传递用户数据权限配置
@@ -132,33 +133,19 @@ public class RowLevelIsolationBaseWrapper {
     private static List<DataPermissionConfig> mockIsolationFields() {
         List<DataPermissionConfig> dataPermissionFieldList = new ArrayList<>();
 
-        DataPermissionConfig vehicleSeries = new DataPermissionConfig();
-        vehicleSeries.setColumn("vehicle_series");
-        vehicleSeries.setExpression("EQ");
-        vehicleSeries.setSqlKeyword(SqlKeyword.valueOf("EQ"));
-        vehicleSeries.setValue("E2UL-1");
-        dataPermissionFieldList.add(vehicleSeries);
+        DataPermissionConfig countryCodeConfig = new DataPermissionConfig();
+        countryCodeConfig.setColumn("country_code");
+        countryCodeConfig.setExpression("EQ");
+        countryCodeConfig.setSqlKeyword(SqlKeyword.valueOf("EQ"));
+        countryCodeConfig.setValue("China");
+        dataPermissionFieldList.add(countryCodeConfig);
 
-        DataPermissionConfig productName = new DataPermissionConfig();
-        productName.setColumn("product_name");
-        productName.setExpression("LIKE");
-        productName.setSqlKeyword(SqlKeyword.valueOf("LIKE"));
-        productName.setValue("DP前左门内饰");
-        dataPermissionFieldList.add(productName);
-
-        DataPermissionConfig stockingPointCode = new DataPermissionConfig();
-        stockingPointCode.setColumn("stocking_point_code");
-        stockingPointCode.setExpression("LIKE");
-        stockingPointCode.setSqlKeyword(SqlKeyword.valueOf("LIKE"));
-        stockingPointCode.setValue("JQR");
-        dataPermissionFieldList.add(stockingPointCode);
-
-        DataPermissionConfig physicalResourceName = new DataPermissionConfig();
-        physicalResourceName.setColumn("physical_resource_name");
-        physicalResourceName.setExpression("LIKE_RIGHT");
-        physicalResourceName.setSqlKeyword(SqlKeyword.valueOf("LIKE_RIGHT"));
-        physicalResourceName.setValue("滴滴滴");
-        dataPermissionFieldList.add(physicalResourceName);
+        DataPermissionConfig cityCodeConfig = new DataPermissionConfig();
+        cityCodeConfig.setColumn("city_code");
+        cityCodeConfig.setExpression("LIKE");
+        cityCodeConfig.setSqlKeyword(SqlKeyword.valueOf("LIKE"));
+        cityCodeConfig.setValue("Chang");
+        dataPermissionFieldList.add(cityCodeConfig);
 
         return dataPermissionFieldList;
     }
