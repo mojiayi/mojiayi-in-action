@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.MDC;
 import org.springframework.core.Ordered;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mojiayi
  */
 @Slf4j
+@Component
 public class DataPermissionConfigInterceptor implements Ordered, HandlerInterceptor {
 
     @Override

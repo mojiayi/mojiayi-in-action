@@ -1,5 +1,7 @@
 package com.mojiayi.action.gateway.auth;
 
+import com.alibaba.fastjson.JSON;
+import com.mojiayi.action.cloud.constant.MyConstant;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
@@ -7,6 +9,10 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * <p>
@@ -22,9 +28,12 @@ public class AuthorizationFilter implements Ordered, GlobalFilter {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpRequest.Builder mutate = request.mutate();
-        // TODO 这里应该写一些登录认证和授权的代码
+        // TODO 这里应该写一些登录认证和授权的代码，获得当前用户的数据隔离配置
 
-        // TODO 设置用户数据权限信息到请求头
+//        List<DataPermissionConfig> dataPermissionFieldList = getUserDataPermission(roleIds, token);
+
+        // 设置用户数据权限信息到请求头
+        addHeader(mutate, MyConstant.DATA_PERMISSION, "JSON格式的数据隔离配置");
 
         return chain.filter(exchange.mutate().request(mutate.build()).build());
     }
@@ -32,5 +41,13 @@ public class AuthorizationFilter implements Ordered, GlobalFilter {
     @Override
     public int getOrder() {
         return Integer.MIN_VALUE + 1;
+    }
+
+    private void addHeader(ServerHttpRequest.Builder mutate, String name, Object value) {
+        if (value == null) {
+            return;
+        }
+        String valueEncode = URLEncoder.encode(value.toString(), StandardCharsets.UTF_8);
+        mutate.header(name, valueEncode);
     }
 }

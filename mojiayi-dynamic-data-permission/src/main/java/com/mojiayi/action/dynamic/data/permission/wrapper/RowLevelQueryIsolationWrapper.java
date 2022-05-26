@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 
 import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -129,21 +131,21 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
             }
             case IN: {
                 if (value instanceof String) {
-                    queryWrapper.in(column, (Object) value.toString().split(StringPool.COMMA));
+                    queryWrapper.in(column, Arrays.asList(value.toString().split(StringPool.COMMA)));
                 } else if (value.getClass().isArray()) {
-                    queryWrapper.in(column, (Object[]) value);
+                    queryWrapper.in(column, Arrays.asList((Object[]) value));
                 } else {
-                    queryWrapper.in(column, value);
+                    queryWrapper.in(column, Collections.singleton(value));
                 }
                 break;
             }
             case NOT_IN: {
                 if (value instanceof String) {
-                    queryWrapper.notIn(column, (Object) value.toString().split(StringPool.COMMA));
+                    queryWrapper.notIn(column, Arrays.asList(value.toString().split(StringPool.COMMA)));
                 } else if (value.getClass().isArray()) {
-                    queryWrapper.notIn(column, (Object[]) value);
+                    queryWrapper.notIn(column, Arrays.asList((Object[]) value));
                 } else {
-                    queryWrapper.notIn(column, value);
+                    queryWrapper.notIn(column, Collections.singleton(value));
                 }
                 break;
             }
