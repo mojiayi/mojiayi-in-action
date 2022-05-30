@@ -49,6 +49,15 @@ public class FeignRequestInterceptor implements RequestInterceptor {
         if (contentType == null || !contentType.toString().contains(MediaType.MULTIPART_FORM_DATA_VALUE)) {
             requestTemplate.header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         }
+
+        transferTraceId(requestTemplate);
+
+        transferAccessToken(requestTemplate);
+
+        transferDataPermissionConfig(requestTemplate);
+    }
+
+    private void transferTraceId(RequestTemplate requestTemplate) {
         var traceId = MDC.get(MyConstant.TRACE_ID);
         if (!StringUtils.hasLength(traceId)) {
             // 网关层没有传递traceId过来，就生成一个新的
@@ -56,7 +65,17 @@ public class FeignRequestInterceptor implements RequestInterceptor {
             MDC.put(MyConstant.TRACE_ID, traceId);
         }
         requestTemplate.header(MyConstant.TRACE_ID, traceId);
+    }
 
+    private void transferAccessToken(RequestTemplate requestTemplate) {
+        var accessToken = MDC.get(MyConstant.X_ACCESS_TOKEN);
+        if (accessToken == null) {
+            return;
+        }
+        requestTemplate.header(MyConstant.X_ACCESS_TOKEN, accessToken);
+    }
+
+    private void transferDataPermissionConfig(RequestTemplate requestTemplate) {
         // 把从本地线程空间获得的角色数据权限配置存入request header，传递给下游服务
         String dataPermissionConfig = MDC.get(MyConstant.DATA_PERMISSION);
         if (log.isDebugEnabled()) {
