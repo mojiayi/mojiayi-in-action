@@ -29,11 +29,9 @@ import java.util.function.Consumer;
 public class TraceIdFilter implements Ordered, GlobalFilter {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        var traceId = MDC.get(MyConstant.TRACE_ID);
-        if (StringUtils.isBlank(traceId)) {
-            traceId = getTraceId();
-            MDC.put(MyConstant.TRACE_ID, traceId);
-        }
+        var traceId = getTraceId();
+        MDC.put(MyConstant.TRACE_ID, traceId);
+
         ServerHttpRequest request = exchange.getRequest();
         Map<String, String> headerMap = new HashMap<>(request.getHeaders().size() + 1);
         headerMap.putAll(request.getHeaders().toSingleValueMap());
