@@ -28,19 +28,25 @@ public class UserInfoServiceImpl implements IUserInfoService {
     @Resource
     private UserInfoMapper userInfoMapper;
 
+    @Resource
+    private RowLevelQueryIsolationWrapper rowLevelQueryIsolationWrapper;
+
+    @Resource
+    private RowLevelUpdateIsolationWrapper rowLevelUpdateIsolationWrapper;
+
     @Override
     public List<UserInfo> fuzzySearchByUsername(String username) {
         if (!username.endsWith(StringPool.PERCENT)) {
             username += StringPool.PERCENT;
         }
 
-        QueryWrapper<UserInfo> queryWrapper = RowLevelQueryIsolationWrapper.initQueryWrapper(new UserInfo());
+        QueryWrapper<UserInfo> queryWrapper = rowLevelQueryIsolationWrapper.initQueryWrapper(new UserInfo());
         return userInfoMapper.fuzzySearchByUsername(username, queryWrapper);
     }
 
     @Override
     public IPage<UserInfo> paging(int pageIndex, int pageSize) {
-        QueryWrapper<UserInfo> queryWrapper = RowLevelQueryIsolationWrapper.initQueryWrapper(new UserInfo());
+        QueryWrapper<UserInfo> queryWrapper = rowLevelQueryIsolationWrapper.initQueryWrapper(new UserInfo());
         return userInfoMapper.selectPage(new Page<>(pageIndex, pageSize), queryWrapper);
     }
 
@@ -48,7 +54,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public int deleteByUsername(String username) {
         UserInfo searchObj = new UserInfo();
         searchObj.setUsername(username);
-        QueryWrapper<UserInfo> deleteWrapper = RowLevelQueryIsolationWrapper.initQueryWrapper(searchObj);
+        QueryWrapper<UserInfo> deleteWrapper = rowLevelQueryIsolationWrapper.initQueryWrapper(searchObj);
         return userInfoMapper.delete(deleteWrapper);
     }
 
@@ -56,7 +62,7 @@ public class UserInfoServiceImpl implements IUserInfoService {
     public int modify(UserInfo userInfo) {
         UserInfo updateObj = new UserInfo();
         updateObj.setId(updateObj.getId());
-        UpdateWrapper<UserInfo> updateWrapper = RowLevelUpdateIsolationWrapper.initUpdateWrapper(updateObj);
+        UpdateWrapper<UserInfo> updateWrapper = rowLevelUpdateIsolationWrapper.initUpdateWrapper(updateObj);
         return userInfoMapper.update(userInfo, updateWrapper);
     }
 }

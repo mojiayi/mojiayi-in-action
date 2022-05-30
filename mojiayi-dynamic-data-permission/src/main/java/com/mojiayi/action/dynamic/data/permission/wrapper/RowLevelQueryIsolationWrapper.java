@@ -10,6 +10,7 @@ import com.mojiayi.action.dynamic.data.permission.beans.DataPermissionConfig;
 import com.mojiayi.action.dynamic.data.permission.constants.MyConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ import java.util.List;
  * @author mojiayi
  */
 @Slf4j
+@Component
 public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper {
     /**
      * 组装Mybatis Plus 查询条件
@@ -36,7 +38,7 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
      * @param <T>       查询参数对象
      * @return 返回组装好的查询条件
      */
-    public static <T> QueryWrapper<T> initQueryWrapper(T searchObj) {
+    public <T> QueryWrapper<T> initQueryWrapper(T searchObj) {
         QueryWrapper<T> queryWrapper = new QueryWrapper<>();
         installMplus(queryWrapper, searchObj);
         return queryWrapper;
@@ -48,7 +50,7 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
      * @param queryWrapper Entity 对象封装操作类
      * @param searchObj    查询条件对象
      */
-    private static void installMplus(QueryWrapper<?> queryWrapper, Object searchObj) {
+    private void installMplus(QueryWrapper<?> queryWrapper, Object searchObj) {
         // 利用反射机制获取类中的属性
         List<Field> classFields = getClassFields(searchObj.getClass());
         // 根据业务接口传入的普通业务字段，拼装where条件
@@ -64,7 +66,7 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
      * @param searchObj    查询条件对象
      * @param classFields  查询条件对象的属性
      */
-    private static void wrapperNormalBusinessCondition(QueryWrapper<?> queryWrapper, Object searchObj, List<Field> classFields) {
+    private void wrapperNormalBusinessCondition(QueryWrapper<?> queryWrapper, Object searchObj, List<Field> classFields) {
         for (Field field : classFields) {
             try {
                 // 如果通过注解标记字段不存在，跳过该字段
@@ -100,7 +102,7 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
      * @param queryWrapper Entity 对象封装操作类
      * @param classFields  查询条件对象的属性
      */
-    private static void wrapperIsolationCondition(QueryWrapper<?> queryWrapper, List<Field> classFields) {
+    private void wrapperIsolationCondition(QueryWrapper<?> queryWrapper, List<Field> classFields) {
         // 获得本次查询可用的数据隔离字段
         List<DataPermissionConfig> isolationFields = getAvailableIsolationFields(classFields);
         if (CollUtil.isEmpty(isolationFields)) {
@@ -119,7 +121,7 @@ public class RowLevelQueryIsolationWrapper extends RowLevelIsolationBaseWrapper 
      * @param sqlKeyword   拼接条件类型
      * @param value        被拼接字段值
      */
-    private static void addQueryCondition(QueryWrapper<?> queryWrapper, String column, SqlKeyword sqlKeyword, Object value) {
+    private void addQueryCondition(QueryWrapper<?> queryWrapper, String column, SqlKeyword sqlKeyword, Object value) {
         switch (sqlKeyword) {
             case LIKE: {
                 queryWrapper.like(column, value);

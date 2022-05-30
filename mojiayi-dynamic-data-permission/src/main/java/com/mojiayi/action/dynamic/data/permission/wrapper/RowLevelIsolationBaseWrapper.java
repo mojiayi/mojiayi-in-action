@@ -46,7 +46,7 @@ public class RowLevelIsolationBaseWrapper {
      * @param fieldName 被判断的字段名
      * @return 是不参与数据隔离的字段返回true，否则返回false
      */
-    protected static boolean isUselessField(String fieldName) {
+    protected boolean isUselessField(String fieldName) {
         return USELESS_FIELDS.contains(fieldName);
     }
 
@@ -56,7 +56,7 @@ public class RowLevelIsolationBaseWrapper {
      * @param field 变量
      * @return 有注解 @TableField ，而且 exist = false 时，返回 true，否则默认返回 false
      */
-    protected static boolean isNotExistField(Field field) {
+    protected boolean isNotExistField(Field field) {
         boolean exist = true;
         if (field.isAnnotationPresent(TableField.class)) {
             TableField tableField = field.getAnnotation(TableField.class);
@@ -71,7 +71,7 @@ public class RowLevelIsolationBaseWrapper {
      * @param field 变量
      * @return 返回变量在数据库表中的字段名
      */
-    protected static String getTableFieldName(Field field) {
+    protected String getTableFieldName(Field field) {
         TableField tableField = field.getAnnotation(TableField.class);
         String fieldName = null;
         if (tableField != null) {
@@ -101,7 +101,7 @@ public class RowLevelIsolationBaseWrapper {
      * @param clazz 类型
      * @return 以列表形式返回指定类中的变量
      */
-    protected static List<Field> getClassFields(Class<?> clazz) {
+    protected List<Field> getClassFields(Class<?> clazz) {
         List<Field> fieldList = new ArrayList<>();
         do {
             Collections.addAll(fieldList, clazz.getDeclaredFields());
@@ -113,7 +113,7 @@ public class RowLevelIsolationBaseWrapper {
     /**
      * 获取当前用户拥有角色所配置的数据属性
      */
-    private static List<DataPermissionConfig> getAllIsolationFields() {
+    private List<DataPermissionConfig> getAllIsolationFields() {
         // 模拟自测时，可以不从本地线程空间获取，直接用 mockIsolationFields 临时提供数据属性配置
         String dataPermissionStr = MDC.get(MyConstant.DATA_PERMISSION);
         if (StringUtils.isBlank(dataPermissionStr)) {
@@ -130,7 +130,7 @@ public class RowLevelIsolationBaseWrapper {
      * 上游没有完成开发时，可以临时模拟自测
      * @return 返回模拟的数据属性
      */
-    private static List<DataPermissionConfig> mockIsolationFields() {
+    private List<DataPermissionConfig> mockIsolationFields() {
         List<DataPermissionConfig> dataPermissionFieldList = new ArrayList<>();
 
         DataPermissionConfig countryCodeConfig = new DataPermissionConfig();
@@ -155,7 +155,7 @@ public class RowLevelIsolationBaseWrapper {
      * @param classFields 传入参数对象的变量
      * @return 返回传入数据的交集
      */
-    protected static List<DataPermissionConfig> getAvailableIsolationFields(List<Field> classFields) {
+    protected List<DataPermissionConfig> getAvailableIsolationFields(List<Field> classFields) {
         if (CollUtil.isEmpty(classFields)) {
             return Collections.emptyList();
         }

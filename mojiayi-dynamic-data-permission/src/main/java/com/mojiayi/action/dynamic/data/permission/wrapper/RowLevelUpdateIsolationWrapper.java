@@ -9,6 +9,7 @@ import com.mojiayi.action.dynamic.data.permission.annotations.ConditionExpressio
 import com.mojiayi.action.dynamic.data.permission.beans.DataPermissionConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -23,6 +24,7 @@ import java.util.List;
  * @author mojiayi
  */
 @Slf4j
+@Component
 public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper {
     /**
      * 组装Mybatis Plus 更新条件
@@ -31,7 +33,7 @@ public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper
      * @param <T>       更新参数对象
      * @return 返回组装好的更新条件
      */
-    public static <T> UpdateWrapper<T> initUpdateWrapper(T updateObj) {
+    public <T> UpdateWrapper<T> initUpdateWrapper(T updateObj) {
         UpdateWrapper<T> updateWrapper = new UpdateWrapper<>();
         installMplus(updateWrapper, updateObj);
         return updateWrapper;
@@ -43,7 +45,7 @@ public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper
      * @param updateWrapper Entity 对象封装操作类
      * @param updateObject  更新条件对象
      */
-    private static void installMplus(UpdateWrapper<?> updateWrapper, Object updateObject) {
+    private void installMplus(UpdateWrapper<?> updateWrapper, Object updateObject) {
         // 利用反射机制获取类中的属性
         List<Field> classFields = getClassFields(updateObject.getClass());
         // 根据业务接口传入的普通业务字段，拼装where条件
@@ -59,7 +61,7 @@ public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper
      * @param searchObj     更新条件对象
      * @param classFields   更新条件对象的属性
      */
-    private static void wrapperNormalBusinessCondition(UpdateWrapper<?> updateWrapper, Object searchObj, List<Field> classFields) {
+    private void wrapperNormalBusinessCondition(UpdateWrapper<?> updateWrapper, Object searchObj, List<Field> classFields) {
         for (Field field : classFields) {
             try {
                 String fieldName = field.getName();
@@ -96,7 +98,7 @@ public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper
      * @param updateWrapper Entity 对象封装操作类
      * @param classFields   更新条件对象的属性
      */
-    private static void wrapperIsolationCondition(UpdateWrapper<?> updateWrapper, List<Field> classFields) {
+    private void wrapperIsolationCondition(UpdateWrapper<?> updateWrapper, List<Field> classFields) {
         // 获得本次更新可用的数据隔离字段
         List<DataPermissionConfig> isolationFields = getAvailableIsolationFields(classFields);
         if (CollUtil.isEmpty(isolationFields)) {
@@ -115,7 +117,7 @@ public class RowLevelUpdateIsolationWrapper extends RowLevelIsolationBaseWrapper
      * @param sqlKeyword    拼接条件类型
      * @param value         被拼接字段值
      */
-    private static void addUpdateConditUpion(UpdateWrapper<?> updateWrapper, String column, SqlKeyword sqlKeyword, Object value) {
+    private void addUpdateConditUpion(UpdateWrapper<?> updateWrapper, String column, SqlKeyword sqlKeyword, Object value) {
         switch (sqlKeyword) {
             case LIKE: {
                 updateWrapper.like(column, value);

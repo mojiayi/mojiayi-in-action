@@ -30,6 +30,8 @@ public class DataPermissionConfigInterceptor implements Ordered, HandlerIntercep
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        // 清理掉线程空间里的数据权限值，避免多线程并发时的干扰
+        MDC.remove(MyConstant.DATA_PERMISSION);
         // 从header中获取用户数据权限配置
         var dataPermissionConfig = request.getHeader(MyConstant.DATA_PERMISSION);
         if (StringUtils.isBlank(dataPermissionConfig)) {
