@@ -1,5 +1,6 @@
 package com.mojiayi.action.mybatis;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author mojiayi
  */
 @SpringBootApplication
-public class MojiayiDynamicDataPermissionProvider {
+@MapperScan("com.mojiayi.action.mybatis.dao")
+public class MojiayiMybatisBootstrap {
     public static void main(String[] args) {
-        SpringApplication.run(MojiayiDynamicDataPermissionProvider.class);
+        SpringApplication.run(MojiayiMybatisBootstrap.class);
     }
 }

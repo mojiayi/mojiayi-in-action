@@ -2,18 +2,18 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     dynamic:
-      primary: db1
+      primary: datasource-sys
       datasource:
         datasource-sys:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3306/sys?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
           username: root
-          password: V-YN]18uPKcf4NR1B?sa
+          password: 123456
         datasource-world:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://localhost:3306/world?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false&allowPublicKeyRetrieval=true
           username: root
-          password: V-YN]18uPKcf4NR1B?sa
+          password: 123456
       druid:
         keep-Alive: true
         initial-size: 5
@@ -47,4 +47,7 @@ spring:
           enabled: false
 logging:
   level:
-    com.mojiayi.action.mybatis.dao: debug
+    com.mojiayi.action.mybatis.dao: info
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
