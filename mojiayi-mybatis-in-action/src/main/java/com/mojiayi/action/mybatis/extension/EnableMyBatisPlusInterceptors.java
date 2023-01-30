@@ -1,4 +1,4 @@
-package com.mojiayi.action.mybatis.datasource;
+package com.mojiayi.action.mybatis.extension;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.plugins.inner.TenantLineInnerIntercept
 import com.mojiayi.action.mybatis.constants.MyConstants;
 import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.NullValue;
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,8 +20,7 @@ import org.springframework.util.StringUtils;
  * @author mojiayi
  */
 @Configuration
-@MapperScan("com.mojiayi.action.dynamic.data.permission.dao")
-public class EnableMyBatisPlusExtensions {
+public class EnableMyBatisPlusInterceptors {
     /**
      * 启用多租户插件
      */

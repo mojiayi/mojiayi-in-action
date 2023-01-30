@@ -7,4 +7,7 @@ import com.mojiayi.action.mybatis.domain.UserInfo;
  * @author mojiayi
  */
 public interface UserInfoMapper extends BaseMapper<UserInfo> {
+    UserInfo selectByUsername(String username);
+
+    int deleteByUsername(String username);
 }

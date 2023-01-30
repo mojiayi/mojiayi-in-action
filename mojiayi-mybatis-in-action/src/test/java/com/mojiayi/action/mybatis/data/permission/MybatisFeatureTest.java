@@ -22,6 +22,41 @@ public class MybatisFeatureTest {
     private UserInfoService userInfoService;
 
     @Test
+    public void testRegisterNewUser() {
+        String tenantId = "1";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+        long operatorId = 10015L;
+        MDC.put(MyConstants.OPERATOR_USER_ID, String.valueOf(operatorId));
+        UserInfo userInfo = userInfoService.registerNewUser("被10015创建的");
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals(operatorId, userInfo.getCreateBy().longValue());
+        Assert.assertEquals(operatorId, userInfo.getUpdateBy().longValue());
+    }
+
+    @Test
+    public void testDeleteUser() {
+        String tenantId = "1";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+        long operatorId = 10010L;
+        UserInfo userInfo = userInfoService.deleteUser("被10010创建的");
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals(operatorId, userInfo.getCreateBy().longValue());
+        Assert.assertEquals(operatorId, userInfo.getUpdateBy().longValue());
+    }
+
+    @Test
+    public void testModifyUserInfo() {
+        String tenantId = "1";
+        MDC.put(MyConstants.TENANT_ID, tenantId);
+        long userId = 1L;
+        long operatorId = 10086L;
+        MDC.put(MyConstants.OPERATOR_USER_ID, String.valueOf(operatorId));
+        UserInfo userInfo = userInfoService.modifyUsernameByUserId(userId, "被10086修改的");
+        Assert.assertNotNull(userInfo);
+        Assert.assertEquals(operatorId, userInfo.getUpdateBy().longValue());
+    }
+
+    @Test
     public void testSelectByUserId() {
         String tenantId = "1";
         MDC.put(MyConstants.TENANT_ID, tenantId);

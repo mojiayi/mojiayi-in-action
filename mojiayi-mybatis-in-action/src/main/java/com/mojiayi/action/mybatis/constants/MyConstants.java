@@ -9,4 +9,6 @@ package com.mojiayi.action.mybatis.constants;
  */
 public interface MyConstants {
     String TENANT_ID = "tenantId";
+
+    String OPERATOR_USER_ID = "currentUserId";
 }

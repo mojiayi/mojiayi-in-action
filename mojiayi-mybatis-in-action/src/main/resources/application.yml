@@ -47,7 +47,7 @@ spring:
           enabled: false
 logging:
   level:
-    com.mojiayi.action.mybatis.dao: info
+    com.mojiayi.action.mybatis.dao: debug
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/*.xml

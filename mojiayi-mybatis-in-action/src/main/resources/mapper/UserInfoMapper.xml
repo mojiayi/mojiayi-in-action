@@ -9,14 +9,32 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="delete_flag" jdbcType="TINYINT" property="deleteFlag"/>
+        <result column="create_by" jdbcType="BIGINT" property="createBy"/>
+        <result column="update_by" jdbcType="BIGINT" property="updateBy"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username, tenant_name, tenant_id, create_time, update_time, delete_flag
+        id, username, tenant_name, tenant_id, create_time, update_time, delete_flag, create_by, update_by
     </sql>
+
+    <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where username = #{username,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user_info
         where id = #{id,jdbcType=BIGINT}
     </select>
+
+    <update id="updateUsernameById" parameterType="java.util.Map">
+        update user_info set username=#{username,jdbcType=VARCHAR} where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <delete id="deleteByUsername" parameterType="string">
+        delete from user_info where username=#{username,jdbcType=VARCHAR}
+    </delete>
 </mapper>
