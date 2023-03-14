@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mojiayi.action.excel.mapper.TableMetaInfoMapper">
+    <select id="selectFieldList" parameterType="string" resultType="com.mojiayi.action.excel.mapper.TableMetaInfoMapper"
+            databaseId="mysql">
+        select table_name tableName, column_name columnName,COLUMN_COMMENT columnComment
+        from information_schema.COLUMNS
+        WHERE table_schema = (SELECT DATABASE()) and table_name =#{tableName}
+    </select>
+
+    <select id="selectFieldList" parameterType="string" resultType="com.mojiayi.action.excel.dto.TableMetaInfo"
+            databaseId="postgresql">
+        SELECT C.relname tableName, A.attname AS columnName, col_description (A.attrelid,A.attnum) AS columnComment
+        FROM pg_class AS C inner join pg_attribute AS A on A.attrelid = C.oid
+        WHERE A.attnum> 0 AND NOT A.attisdropped and C.relname =#{tableName}
+    </select>
+
+    <select id="selectByUniqueKey" parameterType="map" resultType="long">
+        select id from ${tableName} where
+        <foreach item="fieldNameValue" collection="fieldNameValueList" open="" separator=" " close="">
+            ${fieldNameValue.name}=#{fieldNameValue.value} and
+        </foreach>
+        delete_flag = 0
+    </select>
+
+    <insert id="insertNewData" parameterType="map">
+        insert into ${tableName}
+        <foreach item="fieldNameValue" collection="fieldNameValueList" open="(" separator="," close=")">
+            ${fieldNameValue.name}
+        </foreach>
+        values
+        <foreach item="fieldNameValue" collection="fieldNameValueList" open="(" separator="," close=")">
+            <if test="fieldNameValue.value != null">
+                #{fieldNameValue.value}
+            </if>
+            <if test="fieldNameValue.value == null">
+                null
+            </if>
+        </foreach>
+    </insert>
+
+    <update id="logicDeleteData" parameterType="map">
+        update ${tableName} set delete_flag = 1,update_by=#{updateBy},update_time=#{updateTime} where id=#{id} and
+        delete_flag = 0
+    </update>
+</mapper>
