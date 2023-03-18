@@ -27,4 +27,8 @@ public class TableMetaInfo implements Serializable {
      * 字段注释
      */
     private String columnComment;
+    /**
+     * 字段数据类型
+     */
+    private String dataType;
 }

@@ -1,6 +1,7 @@
 package com.mojiayi.action.excel.constant;
 
 import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.format.FastDateFormat;
 
 import java.util.*;
 
@@ -34,6 +35,24 @@ public class ExcelConstant {
         DATETIME_PATTERN_MAP.put(DatePattern.NORM_DATETIME_MINUTE_PATTERN, DatePattern.NORM_DATETIME_MINUTE_PATTERN);
         DATETIME_PATTERN_MAP.put(DatePattern.NORM_DATETIME_PATTERN, DatePattern.NORM_DATETIME_PATTERN);
     }
+
+    public static final Map<String, FastDateFormat> DB_DATE_TIME_FORMAT_MAP = new HashMap<>();
+
+    static {
+        DB_DATE_TIME_FORMAT_MAP.put("datetime", DatePattern.NORM_DATETIME_FORMAT);
+        DB_DATE_TIME_FORMAT_MAP.put("date", DatePattern.NORM_DATE_FORMAT);
+        DB_DATE_TIME_FORMAT_MAP.put("timestamp", DatePattern.NORM_DATETIME_FORMAT);
+    }
+
+
+    /**
+     * 2003版Excel后缀
+     */
+    public static final String EXCEL_2003_SUFFIX = ".xls";
+    /**
+     * Excel后缀
+     */
+    public static final String EXCEL_SUFFIX = ".xlsx";
 
     private ExcelConstant() {
 

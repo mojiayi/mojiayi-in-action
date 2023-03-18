@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -49,13 +50,15 @@ public class ExcelImportVerifyFieldIntegritytHandler extends ExcelImportResponsi
             log.warn("表{}的导入文件列数错误,headerNameList.size={},tableFieldList.size={}", tableName, headerNameList.size(), excelTemplateDTO.getHeaderList().size());
             return String.format("表%s的导入文件列数错误", tableName);
         }
-        boolean allMatch = excelTemplateDTO.getHeaderList().stream().allMatch(v -> headerNameList.contains(v.getName()));
-        if (allMatch) {
+        List<String> columnCommentList = excelTemplateDTO.getHeaderList().stream().map(FixedTableHeader::getName).collect(Collectors.toList());
+        columnCommentList.removeIf(headerNameList::contains);
+
+        if (CollUtil.isEmpty(columnCommentList)) {
             log.info("通过校验，导入文件表格中的列和目标表业务字段都匹配,tableName={}", tableName);
             return null;
         } else {
-            log.warn("校验不通过，表{}的导入文件列与表字段不匹配,headerNameList={},tableFieldList={}", tableName, JSON.toJSONString(headerNameList),
-                    JSON.toJSONString(excelTemplateDTO.getHeaderList().stream().map(FixedTableHeader::getName)));
+            log.info("校验不通过，表{}的导入文件列与表字段不匹配,headerNameList={},tableFieldList={}", tableName, JSON.toJSONString(headerNameList),
+                    JSON.toJSONString(columnCommentList));
             return String.format("表%s的导入文件列与表字段不匹配", tableName);
         }
     }

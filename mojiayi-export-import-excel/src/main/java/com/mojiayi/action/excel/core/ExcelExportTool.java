@@ -5,9 +5,13 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.google.common.base.CaseFormat;
 import com.mojiayi.action.excel.annotation.FixedColumn;
+import com.mojiayi.action.excel.constant.ExcelConstant;
 import com.mojiayi.action.excel.dto.ExcelTemplateDTO;
 import com.mojiayi.action.excel.dto.FixedTableHeader;
+import com.mojiayi.action.excel.dto.TableMetaInfo;
+import com.mojiayi.action.excel.mapper.TableMetaInfoMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.util.Strings;
@@ -40,29 +44,34 @@ import java.util.stream.Collectors;
 @Component
 public class ExcelExportTool {
     @Resource
+    public TableMetaInfoMapper tableMetaInfoMapper;
+
+    @Resource
     public ExcelImportTool excelImportTool;
 
     /**
      * 导出自定义表头的excel表格到本地磁盘
      *
+     * @param tableName  表名
      * @param headerList 要导出的文件表头
      * @param filepath   输出文件的绝对路径
      * @throws FileNotFoundException 文件不存在的异常
      */
-    public void exportCustomizeHeaderLocalExcel(List<FixedTableHeader> headerList, String filepath) throws FileNotFoundException, InvocationTargetException, IllegalAccessException {
-        exportCustomizeHeaderLocalExcel(headerList, Collections.emptyList(), filepath);
+    public void exportCustomizeHeaderLocalExcel(String tableName, List<FixedTableHeader> headerList, String filepath) throws FileNotFoundException, InvocationTargetException, IllegalAccessException {
+        exportCustomizeHeaderLocalExcel(tableName, headerList, Collections.emptyList(), filepath);
     }
 
     /**
      * 导出自定义表头的excel表格到本地磁盘
      *
+     * @param tableName  表名
      * @param headerList 要导出的文件表头
      * @param dataList   要被导出的数据，可为空
      * @param filepath   输出文件的绝对路径
      * @param <T>        被导出数据的类型
      * @throws FileNotFoundException 文件不存在的异常
      */
-    public <T> void exportCustomizeHeaderLocalExcel(List<FixedTableHeader> headerList, List<?> dataList, String filepath) throws FileNotFoundException, InvocationTargetException, IllegalAccessException {
+    public <T> void exportCustomizeHeaderLocalExcel(String tableName, List<FixedTableHeader> headerList, List<?> dataList, String filepath) throws FileNotFoundException, InvocationTargetException, IllegalAccessException {
         if (CollUtil.isEmpty(headerList)) {
             log.info("传入表头为空不需要导出表格");
             return;
@@ -73,7 +82,7 @@ public class ExcelExportTool {
 
         List<List<String>> rows = new ArrayList<>();
         if (CollUtil.isNotEmpty(dataList)) {
-            rows = outputDataRow(dataList, headerPropList);
+            rows = outputDataRow(tableName, dataList, headerPropList);
         }
         rows.add(0, headerNameList);
 
@@ -103,10 +112,10 @@ public class ExcelExportTool {
      * 导出自定义表头的excel表格到http请求的返回结果
      *
      * @param headerList 要导出的文件表头
-     * @param dataList   要被导出的数据，可为空
+     * @param dataList 要被导出的数据，可为空
      * @param filename   导出文件的名称
      * @param response   HTTP请求的servlet返回对象
-     * @param <T>        被导出数据的类型
+     * @param <T>      被导出数据的类型
      * @throws IOException 文件输出异常
      */
     public <T> void exportCustomizeHeaderHttpResponseExcel(List<FixedTableHeader> headerList, List<?> dataList, String filename, HttpServletResponse response) throws IOException, InvocationTargetException, IllegalAccessException {
@@ -120,7 +129,7 @@ public class ExcelExportTool {
 
         List<List<String>> rows = new ArrayList<>();
         if (CollUtil.isNotEmpty(dataList)) {
-            rows = outputDataRow(dataList, headerPropList);
+            rows = outputDataRow(null, dataList, headerPropList);
         }
         rows.add(0, headerNameList);
 
@@ -134,10 +143,10 @@ public class ExcelExportTool {
     /**
      * 把传入的数据导出成excel表格到本地磁盘
      *
-     * @param tableName 表名
-     * @param dataList  要被导出的数据
-     * @param filepath  输出文件的绝对路径
-     * @param <T>       被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
+     * @param tableName  表名
+     * @param dataList 要被导出的数据
+     * @param filepath 输出文件的绝对路径
+     * @param <T>      被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
      * @throws IllegalAccessException    通过反射获取导出元素上数据时可能会抛出非法访问异常
      * @throws InvocationTargetException 通过反射获取导出元素上数据时可能会抛出对象访问异常
      * @throws FileNotFoundException     文件不存在的异常
@@ -154,28 +163,28 @@ public class ExcelExportTool {
             }
 
             try {
-                exportCustomizeHeaderLocalExcel(excelTemplateDTO.getHeaderList(), filepath);
+                exportCustomizeHeaderLocalExcel(tableName, excelTemplateDTO.getHeaderList(), filepath);
             } catch (IOException | InvocationTargetException | IllegalAccessException e) {
                 log.info("导出表{}的空数据表格失败", tableName, e);
             }
-            return;
-        }
-        ExcelWriter excelWriter = exportExcel(dataList);
+        } else {
+            ExcelWriter excelWriter = exportExcel(tableName, dataList);
 
-        OutputStream outputStream = new FileOutputStream(filepath);
-        excelWriter.flush(outputStream, true);
-        excelWriter.close();
-        IoUtil.close(outputStream);
+            OutputStream outputStream = new FileOutputStream(filepath);
+            excelWriter.flush(outputStream, true);
+            excelWriter.close();
+            IoUtil.close(outputStream);
+        }
     }
 
     /**
      * 把传入的数据导出成excel表格到http请求的返回结果
      *
-     * @param tableName 表名
-     * @param dataList  要被导出的数据
-     * @param filename  导出文件的名称
-     * @param response  HTTP请求的servlet返回对象
-     * @param <T>       被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
+     * @param tableName  表名
+     * @param dataList 要被导出的数据
+     * @param filename 导出文件的名称
+     * @param response HTTP请求的servlet返回对象
+     * @param <T>      被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
      * @throws IOException               文件输出异常
      * @throws InvocationTargetException 通过反射获取导出元素上数据时可能会抛出对象访问异常
      * @throws IllegalAccessException    通过反射获取导出元素上数据时可能会抛出非法访问异常
@@ -196,11 +205,11 @@ public class ExcelExportTool {
             } catch (IOException | InvocationTargetException | IllegalAccessException e) {
                 log.info("导出表{}的空数据表格失败", tableName, e);
             }
+        } else {
+            ExcelWriter excelWriter = exportExcel(tableName, dataList);
+
+            exportHttpResponseExcel(excelWriter, filename, response);
         }
-
-        ExcelWriter excelWriter = exportExcel(dataList);
-
-        exportHttpResponseExcel(excelWriter, filename, response);
     }
 
     /**
@@ -224,13 +233,14 @@ public class ExcelExportTool {
     /**
      * 把传入的数据导出到excel表格，表头信息通过传入数据各个字段上的注解指定，支持单级表头和两级表头
      *
-     * @param dataList 要被导出的数据
-     * @param <T>      被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
+     * @param tableName 表名
+     * @param dataList  要被导出的数据
+     * @param <T>       被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
      * @return 拼装好的excel文件写对象
      * @throws IllegalAccessException    通过反射获取导出元素上数据时可能会抛出非法访问异常
      * @throws InvocationTargetException 通过反射获取导出元素上数据时可能会抛出对象访问异常
      */
-    private <T> ExcelWriter exportExcel(List<T> dataList) throws IllegalAccessException, InvocationTargetException {
+    private <T> ExcelWriter exportExcel(String tableName, List<T> dataList) throws IllegalAccessException, InvocationTargetException {
         // 传入参数中每个列表元素都是相同类型，取第一个元素的字段
         Field[] fields = dataList.get(0).getClass().getDeclaredFields();
         // 建立以字段名为key，字段为value的映射关系
@@ -256,7 +266,7 @@ public class ExcelExportTool {
         List<String> headerPropList = new ArrayList<>();
         List<String> headerNameList = outputHeader(headerList, headerPropList);
 
-        List<List<String>> rows = outputDataRow(dataList, headerPropList);
+        List<List<String>> rows = outputDataRow(tableName, dataList, headerPropList);
         rows.add(0, headerNameList);
 
         ExcelWriter writer = ExcelUtil.getWriter(true);
@@ -268,8 +278,7 @@ public class ExcelExportTool {
 
     /**
      * 根据传入数据各个字段上的注解，生成动态表头列表
-     *
-     * @param fieldMap       传入数据的字段信息
+     * @param fieldMap 传入数据的字段信息
      * @param parentPropList 传入数据中作为父字段的字段列表
      * @return 返回动态表头列表
      */
@@ -287,7 +296,7 @@ public class ExcelExportTool {
             if (isSubHeader) {
                 // 有父字段时，当作二级表头处理
                 buildDoubleLevelHeaderMap(fieldMap, field, headerMap);
-            } else {
+            }  else {
                 if (!parentPropList.contains(fieldName)) {
                     // 本身不是父字段，也没有指定父字段时，当作一级表头处理
                     headerMap.put(fieldName, new FixedTableHeader(fieldName, annotation.name(), annotation.index()));
@@ -300,9 +309,8 @@ public class ExcelExportTool {
 
     /**
      * 构建二级表头，添加到动态表头中
-     *
-     * @param fieldMap  传入数据的字段信息，在本方法内只用于获取父字段
-     * @param field     当前处理的字段
+     * @param fieldMap 传入数据的字段信息，在本方法内只用于获取父字段
+     * @param field 当前处理的字段
      * @param headerMap 包含所有字段的动态表头映射关系
      */
     private void buildDoubleLevelHeaderMap(Map<String, Field> fieldMap, Field field, Map<String, FixedTableHeader> headerMap) {
@@ -332,7 +340,6 @@ public class ExcelExportTool {
 
     /**
      * 对动态表头按指定的索引排序，属于同一父字段的多个子字段之间排序，和父字段平级的字段之间排序
-     *
      * @param headerMap 包含所有字段的动态表头映射关系
      * @return 返回排序后的动态表头列表
      */
@@ -354,11 +361,11 @@ public class ExcelExportTool {
         for (FixedTableHeader header : headerList) {
             if (CollUtil.isEmpty(header.getChildren())) {
                 row.add(header.getName());
-                headerPropList.add(header.getProp().toLowerCase());
+                headerPropList.add(header.getProp());
             } else {
                 for (FixedTableHeader child : header.getChildren()) {
                     row.add(child.getName());
-                    headerPropList.add(child.getProp().toLowerCase());
+                    headerPropList.add(child.getProp());
                 }
             }
         }
@@ -368,6 +375,7 @@ public class ExcelExportTool {
     /**
      * 把表头和数据内容输出成双层列表格式
      *
+     * @param tableName      表名
      * @param dataList       要被导出的数据
      * @param headerPropList 作为父字段的表头
      * @param <T>            被导出数据的类型，字段上要用注解{@code FixedColumn}配置所在列的表头信息
@@ -375,14 +383,18 @@ public class ExcelExportTool {
      * @throws IllegalAccessException    通过反射获取导出元素上数据时可能会抛出非法访问异常
      * @throws InvocationTargetException 通过反射获取导出元素上数据时可能会抛出对象访问异常
      */
-    private <T> List<List<String>> outputDataRow(List<T> dataList, List<String> headerPropList) throws InvocationTargetException, IllegalAccessException {
+    private <T> List<List<String>> outputDataRow(String tableName, List<T> dataList, List<String> headerPropList) throws InvocationTargetException, IllegalAccessException {
+        List<TableMetaInfo> tableFieldList = tableMetaInfoMapper.selectFieldList(tableName);
+        // 建立字段名和数据类型的映射关系，字段名转换成驼峰命名风格的
+        Map<String, String> columnNameAndDataTypeMap = tableFieldList.stream().collect(Collectors.toMap(v -> CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, v.getColumnName()), TableMetaInfo::getDataType));
+
         Method[] methods = dataList.get(0).getClass().getMethods();
 
         List<List<String>> rows = new ArrayList<>(dataList.size() + 2);
         List<String> row = null;
 
         Map<String, Method> getterMethodMap = Arrays.stream(methods).filter(v -> v.getName().startsWith("get"))
-                .collect(Collectors.toMap(v -> v.getName().replace("get", "").toLowerCase(), Function.identity()));
+                .collect(Collectors.toMap(v -> CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, v.getName().replace("get", "")), Function.identity()));
         Method getterMethod = null;
         for (T dataRecord : dataList) {
             row = new ArrayList<>();
@@ -393,7 +405,7 @@ public class ExcelExportTool {
             for (String headerProp : headerPropList) {
                 getterMethod = getterMethodMap.get(headerProp);
                 if (getterMethod != null) {
-                    row.add(Optional.ofNullable(getterMethod.invoke(dataRecord)).orElse(StringPool.EMPTY).toString());
+                    row.add(convertToCellValue(Optional.ofNullable(getterMethod.invoke(dataRecord)).orElse(StringPool.EMPTY), columnNameAndDataTypeMap.get(headerProp)));
                 } else {
                     row.addAll((List<String>) dataRecord);
                 }
@@ -401,6 +413,24 @@ public class ExcelExportTool {
             rows.add(row);
         }
         return rows;
+    }
+
+    /**
+     * 把要导出的数据转换成合适的格式，目前只有日期和时间类型的要专门处理
+     *
+     * @param value      要导出的原始值
+     * @param dbDataType 要导出数据对应字段的数据类型
+     * @return 以字符串形式返回转换后的值
+     */
+    private String convertToCellValue(Object value, String dbDataType) {
+        if (Strings.isEmpty(dbDataType)) {
+            return value.toString();
+        }
+        if ("timestamp".equals(dbDataType) || "datetime".equals(dbDataType) || "date".equals(dbDataType)) {
+            return ExcelConstant.DB_DATE_TIME_FORMAT_MAP.get(dbDataType).format((Date) value);
+        }
+
+        return value.toString();
     }
 
     /**
