@@ -1,0 +1,39 @@
+kafka:
+  type: org.apache.flume.source.kafka.KafkaSource
+  bootstrapServers: kl.data.growingio.com:9092,K2.data.growingio.com:9092,k3.data.growingio.com:9092
+  consumerSaslJaasConfig: org.apache.kafka.common.security.scram.ScramLoginModule required username="gio_kafka_2_bjev" password="X9T6PdLjMFrI";
+  consumerSaslMechanism: SCRAM-SHA-256
+  consumerSecurityProtocol: SASL_PLATNIEXT
+  agentgioCstmTopics: 8cd0837bd1466b17-cstm
+  agentgioCstmGroupId: 8cd0837bd1466b17-cstm
+  agentgioCstmInsertSql: test
+  agentgioclickTopics:  8cd0837bd1466b17-click
+  agentgioclickGroupId:  8cd0837bd1466b17-click
+  agentgioclickInsertSql: test
+  agentgioactvTopics:  8cd0837bd1466b17-actv
+  agentgioactvGroupId:  8cd0837bd1466b17-actv
+  agentgioactvInsertSql: test
+hive:
+  url: jdbc:hive2://10.68.15.101:2181,10.68.15.102:2181,10.68.15.103:2181/;serviceDiscoveryMode=zooKeeper;zooKeeperNamespace=hiveserver2
+  driver-class-name: org.apache.hive.jdbc.HiveDriver
+  type: com.alibaba.druid.pool.DruidDataSource
+  user: hive
+  password: hive
+  # 下面为连接池的补充设置，应用到上面所有数据源中
+  # 初始化大小，最小，最大
+  initialSize: 1
+  minIdle: 3
+  maxActive: 20
+  # 配置获取连接等待超时的时间
+  maxWait: 60000
+  # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+  timeBetweenEvictionRunsMillis: 60000
+  # 配置一个连接在池中最小生存的时间，单位是毫秒
+  minEvictableIdleTimeMillis: 30000
+  validationQuery: select 1
+  testWhileIdle: true
+  testOnBorrow: false
+  testOnReturn: false
+  # 打开PSCache，并且指定每个连接上PSCache的大小
+  poolPreparedStatements: true
+  maxPoolPreparedStatementPerConnectionSize: 20
