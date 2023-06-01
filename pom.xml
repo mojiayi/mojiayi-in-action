@@ -26,6 +26,7 @@
         <module>calculate-gravity</module>
         <module>mojiayi-dynamic-data-permission</module>
         <module>mojiayi-export-import-excel</module>
+        <module>mojiayi-flink-kafka-in-action</module>
     </modules>
 
     <properties>
